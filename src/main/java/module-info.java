@@ -8,6 +8,7 @@ module com.gv.etiquetasaih {
 
 
     requires org.controlsfx.controls;
+    requires java.desktop;
 
 
     exports com.gv.etiquetasaih.view;
