@@ -1,0 +1,8 @@
+.campo-texto{
+-fx-text-box-border: red;
+-fx-text-border:red;
+-fx-focus-color: red;
+-fx-background-color: red;
+
+
+}
