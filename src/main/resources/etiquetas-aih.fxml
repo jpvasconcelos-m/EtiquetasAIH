@@ -21,7 +21,7 @@
    <bottom>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="campo1" layoutX="226.0" layoutY="23.0" stylesheets="@/caixaDeTexto.css" styleClass="campo-texto" />
+            <TextField fx:id="campo1" layoutX="226.0" layoutY="23.0" styleClass="campo-texto" stylesheets="caixaDeTexto.css" />
             <TextField fx:id="campo2" layoutX="226.0" layoutY="81.0" />
          </children>
       </AnchorPane>
