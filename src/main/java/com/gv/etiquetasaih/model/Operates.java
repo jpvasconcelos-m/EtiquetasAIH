@@ -5,11 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
-
 public class Operates {
     public static void main(String[] args) {
 
-                //creation of collections to manipulate the "Etiqueta" object
+        //creation of collections to manipulate the "Etiqueta" object
         Predicate<Etiqueta> isCyclics = cyclic -> cyclic.cyclicDigit() == 0;
         List<Integer> cyclics = Arrays.asList(0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         ArrayList<Long> hgvAihsLong = new ArrayList<>();
@@ -33,7 +32,6 @@ public class Operates {
         }
 
         if (!c1) {
-
             hgvAih.forEach(System.out::println);
         } else {
             System.out.println("Digite a ultima  AIH impressa");
