@@ -31,8 +31,11 @@ public class Operates {
                  contador ++;
         }
 
+
         if (!c1) {
             hgvAih.forEach(System.out::println);
+
+
         } else {
             System.out.println("Digite a ultima  AIH impressa");
         }
