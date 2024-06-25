@@ -1,4 +1,4 @@
-package com.gv.etiquetasaih.view;
+package com.gv.tagsaih.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

@@ -11,8 +11,8 @@ module com.gv.etiquetasaih {
     requires java.desktop;
 
 
-    exports com.gv.etiquetasaih.view;
-    opens com.gv.etiquetasaih.view to javafx.fxml;
+    exports com.gv.tagsaih.view;
+    opens com.gv.tagsaih.view to javafx.fxml;
 
 
 }

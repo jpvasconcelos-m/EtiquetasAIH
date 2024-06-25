@@ -1,4 +1,4 @@
-package com.gv.etiquetasaih.model;
+package com.gv.tagsaih.model;
 
 public class ListaCircular implements TLista{
 

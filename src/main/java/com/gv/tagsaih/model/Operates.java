@@ -1,4 +1,4 @@
-package com.gv.etiquetasaih.model;
+package com.gv.tagsaih.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,8 +9,8 @@ import java.util.function.Predicate;
 public class Operates {
     public static void main(String[] args) throws Exception {
 
-        //creation of collections to manipulate the "Etiqueta" object
-        Predicate<Etiqueta> isCyclics = cyclic -> cyclic.cyclicDigit() == 0;
+        //creation of collections to manipulate the "Tag" object
+        Predicate<Tag> isCyclics = cyclic -> cyclic.cyclicDigit() == 0;
         List<Integer> cyclics = Arrays.asList(0,0,1,2,3,4,5,6,7,8,9);
         ArrayList<Long> hgvAihsLong = new ArrayList<>();
         ArrayList<String> hgvAih = new ArrayList<>();
@@ -28,8 +28,8 @@ public class Operates {
         }
         System.out.println(circleList.toString());
 
-        Etiqueta init = new Etiqueta(26, 24, 11028345, 1);
-        Etiqueta fin = new Etiqueta(26, 24, 11028350, 6);
+        Tag init = new Tag(26, 24, 11028345, 1);
+        Tag fin = new Tag(26, 24, 11028350, 6);
         int aihInitCod = (init.unitCode());
         String codeYText = aihInitCod + "";
         int aihYear = init.year();

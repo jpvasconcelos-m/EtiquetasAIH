@@ -1,4 +1,4 @@
-package com.gv.etiquetasaih.model;
+package com.gv.tagsaih.model;
 
 
 import com.itextpdf.text.*;
@@ -10,7 +10,7 @@ import java.awt.Desktop;
 import java.io.IOException;
 
 
-public class GeradorEtiquetas {
+public class TagGenerator {
 
 
     //Primeiramente, recebe os dados do FrontEnd.

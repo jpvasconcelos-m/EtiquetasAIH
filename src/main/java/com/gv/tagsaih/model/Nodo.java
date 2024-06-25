@@ -1,4 +1,4 @@
-package com.gv.etiquetasaih.model;
+package com.gv.tagsaih.model;
 
 public class Nodo {
     public String dado;
