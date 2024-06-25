@@ -12,7 +12,7 @@ public class ListaCircular implements TLista{
             inicio.proximo = inicio;
         }else{
             int tamanho = size();
-            for (int i  =1; i < tamanho; i++ ){
+            for (int i  = 1; i < tamanho; i++ ){
                 inicio = inicio.proximo;
             }
             novoNodo.proximo = inicio.proximo;
@@ -39,6 +39,7 @@ public class ListaCircular implements TLista{
             inicio.proximo = inicio.proximo.proximo;
             return nomeElemento;
         }
+
     }
 
     @Override
