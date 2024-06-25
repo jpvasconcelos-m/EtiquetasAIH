@@ -32,8 +32,8 @@ public class Operates {
         Etiqueta fin = new Etiqueta(26, 24, 11028350, 6);
         int aihInitCod = (init.unitCode());
         String codeYText = aihInitCod + "";
-        int aihYea = init.year();
-        String yeaText = aihYea + "";
+        int aihYear = init.year();
+        String yearText = aihYear + "";
 
         boolean c1 = isCyclics.test(init);
 
