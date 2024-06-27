@@ -1,9 +1,6 @@
 package com.gv.tagsaih.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class Operates {
@@ -12,9 +9,11 @@ public class Operates {
         //creation of collections to manipulate the "Tag" object
         Predicate<Tag> isCyclics = cyclic -> cyclic.cyclicDigit() == 0;
         List<Integer> cyclics = Arrays.asList(0,0,1,2,3,4,5,6,7,8,9);
+        //List<String> cyclics = Arrays.asList("0","0","1","2","3","4","5","6","7","8","9");
         ArrayList<Long> hgvAihsLong = new ArrayList<>();
         ArrayList<String> hgvAih = new ArrayList<>();
-        LinkedList<Integer> circleList = new LinkedList<>();
+        //LinkedList<Integer> circleList = new LinkedList<>();
+        CircularLinkedList circleList = new CircularLinkedList();
 
         while(circleList.size() < 11){
             cyclics.forEach(num -> {
@@ -28,8 +27,9 @@ public class Operates {
         }
         System.out.println(circleList.toString());
 
+
         Tag init = new Tag(26, 24, 11028345, 1);
-        Tag fin = new Tag(26, 24, 11028350, 6);
+        Tag fin = new Tag(26, 24, 11028370, 2);
         int aihInitCod = (init.unitCode());
         String codeYText = aihInitCod + "";
         int aihYear = init.year();
@@ -50,9 +50,13 @@ public class Operates {
 
 
         if (!c1) {
-            hgvAih.forEach(System.out::println);
-
-
+           Node currentNode = circleList.getHead();
+           Iterator<String> current = hgvAih.iterator();
+           while (current.hasNext()){
+                String element = current.next();
+                System.out.println(codeYText+yearText+element+currentNode.data);
+                currentNode = circleList.getNext(currentNode);
+           }
         } else {
             System.out.println("Digite a ultima  AIH impressa");
         }

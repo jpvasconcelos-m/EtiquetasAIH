@@ -37,8 +37,9 @@ public interface TLista {
      default String last(){
         return null;
     }
-     default void print(){
+     default String print(){
 
-    }
+         return null;
+     }
 
 }
