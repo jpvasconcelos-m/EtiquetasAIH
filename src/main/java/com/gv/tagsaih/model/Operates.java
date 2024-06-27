@@ -9,10 +9,8 @@ public class Operates {
         //creation of collections to manipulate the "Tag" object
         Predicate<Tag> isCyclics = cyclic -> cyclic.cyclicDigit() == 0;
         List<Integer> cyclics = Arrays.asList(0,0,1,2,3,4,5,6,7,8,9);
-        //List<String> cyclics = Arrays.asList("0","0","1","2","3","4","5","6","7","8","9");
         ArrayList<Long> hgvAihsLong = new ArrayList<>();
         ArrayList<String> hgvAih = new ArrayList<>();
-        //LinkedList<Integer> circleList = new LinkedList<>();
         CircularLinkedList circleList = new CircularLinkedList();
 
         while(circleList.size() < 11){
