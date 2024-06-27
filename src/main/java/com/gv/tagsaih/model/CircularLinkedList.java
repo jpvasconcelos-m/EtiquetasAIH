@@ -76,15 +76,55 @@ public class CircularLinkedList {
 
         return false;
      }
-
+     //Retorna o próximo nó da lista
     public Node getNext(Node currentNode) {
         if (currentNode == null) {
             return null;
         }
         return currentNode.next;
     }
-
+    //Retoorna o primeiro nó da lista
     public Node getHead() {
         return head;
+    }
+
+    // Método para encontrar o índice de um valor na lista circular
+    public int findIndex(int value) {
+        if (head == null) {
+            return -1; // Lista vazia
+        }
+
+        Node currentNode = head;
+        int index = 0;
+
+        do {
+            if (currentNode.data == value) {
+                return index;
+            }
+            index++;
+            currentNode = currentNode.next;
+        } while (currentNode != head);
+
+        return -1; // Valor não encontrado na lista
+    }
+
+    // Método para obter o nó em um índice específico na lista circular
+    public Node getNodeAtIndex(int index) {
+        if (head == null || index < 0) {
+            return null; // Lista vazia ou índice inválido
+        }
+
+        Node currentNode = head;
+        int currentIndex = 0;
+
+        do {
+            if (currentIndex == index) {
+                return currentNode;
+            }
+            currentIndex++;
+            currentNode = currentNode.next;
+        } while (currentNode != head);
+
+        return null; // Índice fora do alcance da lista
     }
 }

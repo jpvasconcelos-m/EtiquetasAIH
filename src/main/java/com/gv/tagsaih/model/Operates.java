@@ -23,10 +23,9 @@ public class Operates {
                 }
             });
         }
-        System.out.println(circleList.toString());
 
 
-        Tag init = new Tag(26, 24, 11028345, 1);
+        Tag init = new Tag(26, 24, 11028345, 9);
         Tag fin = new Tag(26, 24, 11028370, 2);
         int aihInitCod = (init.unitCode());
         String codeYText = aihInitCod + "";
@@ -46,23 +45,39 @@ public class Operates {
                  contador ++;
         }
 
-
         if (!c1) {
-           Node currentNode = circleList.getHead();
-           Iterator<String> current = hgvAih.iterator();
-           while (current.hasNext()){
+            //Node currentNode = circleList.getHead();
+            Node nodeAtIndex = circleList.getNodeAtIndex(init.cyclicDigit()+1);
+            Iterator<String> current = hgvAih.iterator();
+            while (current.hasNext()){
                 String element = current.next();
-                System.out.println(codeYText+yearText+element+currentNode.data);
-                currentNode = circleList.getNext(currentNode);
+                System.out.println(codeYText+yearText+element+"-"+nodeAtIndex.data);
+                nodeAtIndex = circleList.getNext(nodeAtIndex);
            }
         } else {
             System.out.println("Digite a ultima  AIH impressa");
+            Tag previous = new Tag(26, 24, 11028344, 9);
+            if (previous.cyclicDigit() == 9) {
+                Node currentNode = circleList.getHead();
+                //Node nodeAtIndex = circleList.getNodeAtIndex(init.cyclicDigit()+1);
+                Iterator<String> current = hgvAih.iterator();
+                while (current.hasNext()) {
+                    String element = current.next();
+                    System.out.println(codeYText + yearText + element + "-" + currentNode.data);
+                    currentNode = circleList.getNext(currentNode);
+                }
+            } else {
+                Node nodeAtIndex = circleList.getNodeAtIndex(init.cyclicDigit()+1);
+                Iterator<String> current = hgvAih.iterator();
+                while (current.hasNext()){
+                    String element = current.next();
+                    System.out.println(codeYText+yearText+element+"-"+nodeAtIndex.data);
+                    nodeAtIndex = circleList.getNext(nodeAtIndex);
+                }
+
+            }
+
         }
-
-
-
-
-
 
     }
 
