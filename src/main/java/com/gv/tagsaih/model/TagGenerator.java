@@ -10,6 +10,8 @@ import java.awt.Desktop;
 import java.io.IOException;
 
 
+/* This class is responsible for PDF creation. */
+
 public class TagGenerator {
 
 
@@ -24,21 +26,7 @@ public class TagGenerator {
     }
 
     private static void testarPdf() throws IOException, DocumentException {
-         //Configura tamanho da página:
-         Document document = new Document(new Rectangle(42f,98f),0,0,4,0);
-         //Rotaciona para paisagem:
-         document.setPageSize(document.getPageSize().rotate());
-         //Cria um arquivo pdf:
-         PdfWriter.getInstance(document, new FileOutputStream("teste.pdf"));
 
-         document.open();
-
-         Paragraph paragraph = new Paragraph("Teste - 1234");
-         paragraph.setAlignment(Paragraph.ALIGN_CENTER);
-         document.add(paragraph);
-         Desktop.getDesktop().open(new File("teste.pdf"));
-
-         document.close();
     }
     private void criarParagrafoAlinhado(){
 
