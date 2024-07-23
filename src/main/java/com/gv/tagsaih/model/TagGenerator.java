@@ -58,23 +58,12 @@ public class TagGenerator {
 
         document.open();
 
-        for (int i = 0; i < (numero2-numero1) ; i++) {
 
-            int temp = numero1 +i;
-
-            Paragraph paragraph1 = new Paragraph(temp);
-            paragraph1.setAlignment(Paragraph.ALIGN_CENTER);
-            document.add(paragraph1);
-           paragraph1 = new Paragraph(temp + " - copia");
-           document.newPage();
-            document.add(paragraph1);
+        Paragraph paragraph = new Paragraph("Teste");
+        paragraph.setAlignment(Element.ALIGN_CENTER);
+        document.add(paragraph);
 
 
-            Paragraph paragraph2 = new Paragraph(temp + " - Cópia");
-            paragraph2.setAlignment(Paragraph.ALIGN_CENTER);
-            document.add(paragraph2);
-
-        }
 
 
 
