@@ -59,9 +59,14 @@ public class TagGenerator {
         document.open();
 
 
-        Paragraph paragraph = new Paragraph("Teste");
-        paragraph.setAlignment(Element.ALIGN_CENTER);
-        document.add(paragraph);
+
+
+        for (int i = 1; i <= 13; i++) { // Mudando para 1 a 13
+            document.newPage();
+            Paragraph paragraph = new Paragraph("test - " + String.valueOf(i));
+            paragraph.setAlignment(Element.ALIGN_CENTER);
+            document.add(paragraph);
+        }
 
 
 
