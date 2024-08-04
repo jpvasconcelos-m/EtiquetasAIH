@@ -61,7 +61,7 @@ public class TagGenerator {
 
 
 
-        for (int i = numero1; i <= numero2; i++) { // Mudando para 1 a 13
+        for (int i = numero1; i <= numero2; i++) {
             document.newPage();
             Paragraph paragraph = new Paragraph("test - " + String.valueOf(i));
             paragraph.setAlignment(Element.ALIGN_CENTER);
