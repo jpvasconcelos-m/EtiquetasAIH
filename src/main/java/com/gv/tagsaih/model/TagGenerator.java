@@ -19,7 +19,7 @@ public class TagGenerator {
 
     //TESTE:
     public static void main(String[] args) throws Exception {
-          testarPdf2(1000,2000);
+          generatePdfFile(1000,2000);
 
     }
 
@@ -48,7 +48,7 @@ public class TagGenerator {
 
     }
 
-    private static void testarPdf2(int numero1, int numero2) throws Exception{
+    private static void generatePdfFile(int numero1, int numero2) throws Exception{
         //Configura tamanho da página:
         Document document = new Document(new Rectangle(42f,98f),0,0,4,0);
         //Rotaciona para paisagem:
