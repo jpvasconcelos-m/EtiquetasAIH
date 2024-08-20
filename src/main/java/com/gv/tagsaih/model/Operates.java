@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.function.Predicate;
 
 public class Operates {
-    public static void main(String[] args) throws Exception {
+    public static List<String> Operate(Tag initalTag, Tag finalTag) throws Exception {
 
         // Define um Predicate para verificar se o objeto Tag é cíclico
         Predicate<Tag> isCyclics = cyclic -> cyclic.cyclicDigit() == 0;
@@ -19,6 +19,9 @@ public class Operates {
         // Cria uma lista circular personalizada
         CircularLinkedList circleList = new CircularLinkedList();
 
+        //Lista final de Tags.
+        List<Tag> listaTags = new ArrayList<>();
+
         // Adiciona elementos à lista circular até que seu tamanho seja 11
         while(circleList.size() < 11){
             cyclics.forEach(num -> {
@@ -30,22 +33,23 @@ public class Operates {
             });
         }
 
-        // Cria dois objetos Tag para manipulação
-        Tag init = new Tag(26, 24, 11028345, 9);
-        Tag fin = new Tag(26, 24, 11028370, 2);
+        // Cria dois objetos Tag para manipulação (TESTE)
+       // Tag init = new Tag(26, 24, 11028345, 9);
+        // Tag fin = new Tag(26, 24, 11028370, 2);
+
 
         // Obtém o código da unidade e o ano do Tag inicial
-        int aihInitCod = (init.unitCode());
+        int aihInitCod = (initalTag.unitCode());
         String codeYText = aihInitCod + "";
-        int aihYear = init.year();
+        int aihYear = initalTag.year();
         String yearText = aihYear + "";
 
         // Verifica se o Tag inicial é cíclico
-        boolean c1 = isCyclics.test(init);
+        boolean c1 = isCyclics.test(initalTag);
 
         // Manipula dados recebidos, armazenando números em uma lista
-        long contador = init.increasingDigit();
-        long contador2 = fin.increasingDigit();
+        long contador = initalTag.increasingDigit();
+        long contador2 = finalTag.increasingDigit();
 
         // Adiciona números à lista e converte para string
         while (contador <= contador2){
@@ -58,7 +62,7 @@ public class Operates {
         // Se o Tag inicial não for cíclico
         if (!c1) {
             // Obtém o nó na lista circular na posição do dígito cíclico do Tag inicial + 1
-            Node nodeAtIndex = circleList.getNodeAtIndex(init.cyclicDigit() + 1);
+            Node nodeAtIndex = circleList.getNodeAtIndex(initalTag.cyclicDigit() + 1);
 
             // Itera sobre a lista de strings e imprime o resultado
             Iterator<String> current = hgvAih.iterator();
@@ -88,7 +92,7 @@ public class Operates {
                 }
             } else {
                 // Se o dígito cíclico do Tag anterior não for 9
-                Node nodeAtIndex = circleList.getNodeAtIndex(init.cyclicDigit() + 1);
+                Node nodeAtIndex = circleList.getNodeAtIndex(initalTag.cyclicDigit() + 1);
                 Iterator<String> current = hgvAih.iterator();
                 while (current.hasNext()){
                     String element = current.next();
@@ -97,5 +101,8 @@ public class Operates {
                 }
             }
         }
+
+        return hgvAih;
     }
+
 }
