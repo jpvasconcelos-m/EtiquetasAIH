@@ -20,6 +20,7 @@ public class TagGenerator {
     //TESTE:
     public static void main(String[] args) throws Exception {
           generatePdfFile(1000,2000);
+          Operates.Operate(new Tag(26, 24, 11028345, 9),new Tag(26, 24, 11028370, 2));
 
     }
 
