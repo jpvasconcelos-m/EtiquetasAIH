@@ -10,7 +10,7 @@ public class Operates {
         Predicate<Tag> isCyclics = cyclic -> cyclic.cyclicDigit() == 0;
 
         // Cria uma lista de inteiros que será usada para adicionar elementos à lista circular
-        List<Integer> cyclics = Arrays.asList(0,0,1,2,3,4,5,6,7,8,9);
+        List<Integer> cyclics = Arrays.asList(0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
         // Cria listas para armazenar números e strings
         ArrayList<Long> hgvAihsLong = new ArrayList<>();
@@ -19,11 +19,11 @@ public class Operates {
         // Cria uma lista circular personalizada
         CircularLinkedList circleList = new CircularLinkedList();
 
-        //Lista final de Tags.
+        // Lista final de Tags.
         List<Tag> listaTags = new ArrayList<>();
 
         // Adiciona elementos à lista circular até que seu tamanho seja 11
-        while(circleList.size() < 11){
+        while (circleList.size() < 11) {
             cyclics.forEach(num -> {
                 try {
                     circleList.add(num);
@@ -33,16 +33,11 @@ public class Operates {
             });
         }
 
-        // Cria dois objetos Tag para manipulação (TESTE)
-       // Tag init = new Tag(26, 24, 11028345, 9);
-        // Tag fin = new Tag(26, 24, 11028370, 2);
-
-
         // Obtém o código da unidade e o ano do Tag inicial
-        int aihInitCod = (initalTag.unitCode());
-        String codeYText = aihInitCod + "";
+        int aihInitCod = initalTag.unitCode();
+        String codeYText = Integer.toString(aihInitCod);
         int aihYear = initalTag.year();
-        String yearText = aihYear + "";
+        String yearText = Integer.toString(aihYear);
 
         // Verifica se o Tag inicial é cíclico
         boolean c1 = isCyclics.test(initalTag);
@@ -52,57 +47,46 @@ public class Operates {
         long contador2 = finalTag.increasingDigit();
 
         // Adiciona números à lista e converte para string
-        while (contador <= contador2){
+        while (contador <= contador2) {
             hgvAihsLong.add(contador);
             String strCont = Long.toString(contador);
             hgvAih.add(strCont);
             contador++;
         }
 
+        // Cria uma lista para armazenar as tags formatadas
+        List<String> formattedTags = new ArrayList<>();
+
         // Se o Tag inicial não for cíclico
         if (!c1) {
-            // Obtém o nó na lista circular na posição do dígito cíclico do Tag inicial + 1
             Node nodeAtIndex = circleList.getNodeAtIndex(initalTag.cyclicDigit() + 1);
-
-            // Itera sobre a lista de strings e imprime o resultado
-            Iterator<String> current = hgvAih.iterator();
-            while (current.hasNext()){
-                String element = current.next();
-                System.out.println(codeYText + yearText + element + "-" + nodeAtIndex.data);
+            for (String element : hgvAih) {
+                String formattedTag = codeYText + yearText + element + "-" + nodeAtIndex.data;
+                formattedTags.add(formattedTag);
                 nodeAtIndex = circleList.getNext(nodeAtIndex);
             }
         } else {
-            // Se o Tag inicial for cíclico
             System.out.println("Digite a ultima AIH impressa");
 
-            // Cria um Tag anterior para comparação
             Tag previous = new Tag(26, 24, 11028344, 9);
-
-            // Se o dígito cíclico do Tag anterior for 9
             if (previous.cyclicDigit() == 9) {
-                // Obtém o nó cabeça da lista circular
                 Node currentNode = circleList.getHead();
-
-                // Itera sobre a lista de strings e imprime o resultado usando o nó cabeça
-                Iterator<String> current = hgvAih.iterator();
-                while (current.hasNext()) {
-                    String element = current.next();
-                    System.out.println(codeYText + yearText + element + "-" + currentNode.data);
+                for (String element : hgvAih) {
+                    String formattedTag = codeYText + yearText + element + "-" + currentNode.data;
+                    formattedTags.add(formattedTag);
                     currentNode = circleList.getNext(currentNode);
                 }
             } else {
-                // Se o dígito cíclico do Tag anterior não for 9
                 Node nodeAtIndex = circleList.getNodeAtIndex(initalTag.cyclicDigit() + 1);
-                Iterator<String> current = hgvAih.iterator();
-                while (current.hasNext()){
-                    String element = current.next();
-                    System.out.println(codeYText + yearText + element + "-" + nodeAtIndex.data);
+                for (String element : hgvAih) {
+                    String formattedTag = codeYText + yearText + element + "-" + nodeAtIndex.data;
+                    formattedTags.add(formattedTag);
                     nodeAtIndex = circleList.getNext(nodeAtIndex);
                 }
             }
         }
 
-        return hgvAih;
+        // Retorna a lista de tags formatadas
+        return formattedTags;
     }
-
 }
