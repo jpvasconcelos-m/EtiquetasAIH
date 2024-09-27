@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.awt.Desktop;
 import java.io.IOException;
+import java.util.List;
 
 
 public class TagGenerator {
@@ -19,8 +20,10 @@ public class TagGenerator {
 
     //TESTE:
     public static void main(String[] args) throws Exception {
-          generatePdfFile(1000,2000);
-        System.out.println(Operates.Operate(new Tag(26, 24, 11028345, 9),new Tag(26, 24, 11028370, 2)));
+        Operates operates = new Operates();
+        System.out.println(operates.operate(new Tag(26, 24, 11028345, 9),new Tag(26, 24, 11028370, 2)));
+        generatePdfFile(new Tag(26, 24, 11028345, 9),new Tag(26, 24, 11028370, 2));
+
 
     }
 
@@ -49,7 +52,7 @@ public class TagGenerator {
 
     }
 
-    private static void generatePdfFile(int numero1, int numero2) throws Exception{
+    private static void generatePdfFile(Tag tag1, Tag tag2) throws Exception{
         //Configura tamanho da página:
         Document document = new Document(new Rectangle(42f,98f),0,0,4,0);
         //Rotaciona para paisagem:
@@ -60,14 +63,17 @@ public class TagGenerator {
         document.open();
 
 
+       Operates operates = new Operates();
+        List<String> tags = operates.operate(tag1,tag2);
 
-
-        for (int i = numero1; i <= numero2; i++) {
+        for (int i = 0; i < tags.size() ; i++) {
             document.newPage();
-            Paragraph paragraph = new Paragraph("test - " + String.valueOf(i));
+            Paragraph paragraph = new Paragraph(tags.get(i));
             paragraph.setAlignment(Element.ALIGN_CENTER);
             document.add(paragraph);
+
         }
+
 
 
 

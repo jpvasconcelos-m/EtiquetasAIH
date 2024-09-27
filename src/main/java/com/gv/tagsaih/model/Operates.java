@@ -4,23 +4,27 @@ import java.util.*;
 import java.util.function.Predicate;
 
 public class Operates {
-    public static List<String> Operate(Tag initalTag, Tag finalTag) throws Exception {
 
-        // Define um Predicate para verificar se o objeto Tag é cíclico
-        Predicate<Tag> isCyclics = cyclic -> cyclic.cyclicDigit() == 0;
+    // Define um Predicate para verificar se o objeto Tag é cíclico
+    Predicate<Tag> isCyclics = cyclic -> cyclic.cyclicDigit() == 0;
 
-        // Cria uma lista de inteiros que será usada para adicionar elementos à lista circular
-        List<Integer> cyclics = Arrays.asList(0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+    // Cria uma lista de inteiros que será usada para adicionar elementos à lista circular
+    List<Integer> cyclics = Arrays.asList(0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
-        // Cria listas para armazenar números e strings
-        ArrayList<Long> hgvAihsLong = new ArrayList<>();
-        ArrayList<String> hgvAih = new ArrayList<>();
+    // Cria listas para armazenar números e strings
+    ArrayList<Long> hgvAihsLong = new ArrayList<>();
+    ArrayList<String> hgvAih = new ArrayList<>();
 
-        // Cria uma lista circular personalizada
-        CircularLinkedList circleList = new CircularLinkedList();
+    // Cria uma lista circular personalizada
+    CircularLinkedList circleList = new CircularLinkedList();
 
-        // Lista final de Tags.
-        List<Tag> listaTags = new ArrayList<>();
+    // Lista final de Tags.
+    List<Tag> listaTags = new ArrayList<>();
+    // Cria uma lista para armazenar as tags formatadas
+    List<String> formattedTags = new ArrayList<>();
+    public List<String> operate(Tag initalTag, Tag finalTag) throws Exception {
+
+
 
         // Adiciona elementos à lista circular até que seu tamanho seja 11
         while (circleList.size() < 11) {
@@ -54,8 +58,7 @@ public class Operates {
             contador++;
         }
 
-        // Cria uma lista para armazenar as tags formatadas
-        List<String> formattedTags = new ArrayList<>();
+
 
         // Se o Tag inicial não for cíclico
         if (!c1) {
@@ -89,4 +92,6 @@ public class Operates {
         // Retorna a lista de tags formatadas
         return formattedTags;
     }
+
+
 }
