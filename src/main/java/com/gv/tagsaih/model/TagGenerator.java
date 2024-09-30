@@ -68,9 +68,14 @@ public class TagGenerator {
 
         for (int i = 0; i < tags.size() ; i++) {
             document.newPage();
-            Paragraph paragraph = new Paragraph(tags.get(i));
-            paragraph.setAlignment(Element.ALIGN_CENTER);
-            document.add(paragraph);
+            Paragraph paragraph1 = new Paragraph(tags.get(i));
+            paragraph1.setAlignment(Element.ALIGN_CENTER);
+            document.add(paragraph1);
+
+            document.newPage();
+            Paragraph paragraph2 = new Paragraph(tags.get(i) + " Cópia");
+            paragraph2.setAlignment(Element.ALIGN_CENTER);
+            document.add(paragraph2);
 
         }
 
