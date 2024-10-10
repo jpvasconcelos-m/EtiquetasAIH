@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0000;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <top>
@@ -15,14 +18,30 @@
                   <Image url="@ses-pe-secretaria-de-saude-do-estado-de-pernambuco.png" />
                </image>
             </ImageView>
+            <Label layoutX="202.0" layoutY="75.0" text="Gerador de Etiquetas" textFill="#94dbc2">
+               <font>
+                  <Font name="Impact" size="36.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </top>
    <bottom>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="campo1" layoutX="226.0" layoutY="23.0" styleClass="campo-texto" stylesheets="caixaDeTexto.css" />
-            <TextField fx:id="campo2" layoutX="226.0" layoutY="81.0" />
+            <TextField fx:id="campo1" layoutX="226.0" layoutY="6.0" prefHeight="38.0" prefWidth="176.0" styleClass="no-border" stylesheets="caixaDeTexto.css" />
+            <TextField fx:id="campo2" layoutX="226.0" layoutY="52.0" prefHeight="37.0" prefWidth="177.0" styleClass="no-border" stylesheets="@caixaDeTexto.css" />
+            <Button layoutX="273.0" layoutY="116.0" mnemonicParsing="false" styleClass="elegant-button" stylesheets="@caixaDeTexto.css" text="GERAR" />
+            <ImageView fitHeight="25.0" fitWidth="22.0" layoutX="233.0" layoutY="13.0">
+               <image>
+                  <Image url="@../../../../../../Desktop/21251.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="22.0" layoutX="233.0" layoutY="58.0">
+               <image>
+                  <Image url="@../../../../../../Desktop/21251.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </bottom>
