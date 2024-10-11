@@ -22,7 +22,8 @@ public class TagGenerator {
     public static void main(String[] args) throws Exception {
         Operates operates = new Operates();
         System.out.println(operates.operate(new Tag(26, 24, 11028345, 9),new Tag(26, 24, 11028370, 2)));
-        generatePdfFile(new Tag(26, 24, 11028345, 9),new Tag(26, 24, 11028370, 2));
+//        generatePdfFile(new Tag(26, 24, 11028345, 9),new Tag(26, 24, 11028370, 2));
+        convertStringToTag("26,24,10190148,7");
 
 
     }
@@ -44,15 +45,27 @@ public class TagGenerator {
 
          document.close();
     }
-    private void criarParagrafoAlinhado(){
+    public static Tag convertStringToTag(String tagString) {
+        // Supondo que a string tem o formato "param1,param2,param3,param4"
+        String[] parts = tagString.split(",");
 
+        if (parts.length != 4) {
+            throw new IllegalArgumentException("A string deve conter exatamente 4 parâmetros separados por vírgula.");
+        }
 
+        try {
+            int param1 = Integer.parseInt(parts[0].trim());
+            int param2 = Integer.parseInt(parts[1].trim());
+            int param3 = Integer.parseInt(parts[2].trim());
+            int param4 = Integer.parseInt(parts[3].trim());
 
-
-
+            return new Tag(param1, param2, param3, param4);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Os parâmetros devem ser inteiros.", e);
+        }
     }
 
-    private static void generatePdfFile(Tag tag1, Tag tag2) throws Exception{
+    public static void generatePdfFile(String stringTag1, String stringTag2) throws Exception{
         //Configura tamanho da página:
         Document document = new Document(new Rectangle(42f,98f),0,0,4,0);
         //Rotaciona para paisagem:
@@ -64,6 +77,8 @@ public class TagGenerator {
 
 
        Operates operates = new Operates();
+       Tag tag1 = convertStringToTag(stringTag1);
+       Tag tag2 = convertStringToTag(stringTag2);
         List<String> tags = operates.operate(tag1,tag2);
 
         for (int i = 0; i < tags.size() ; i++) {

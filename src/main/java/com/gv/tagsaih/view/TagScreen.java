@@ -1,6 +1,8 @@
 package com.gv.tagsaih.view;
 
+import com.gv.tagsaih.model.TagGenerator;
 import javafx.application.Application;
+import javafx.event.Event;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -68,6 +70,19 @@ public class TagScreen extends Application {
         gerarButton.setLayoutX(273);
         gerarButton.setLayoutY(116);
         gerarButton.getStyleClass().add("elegant-button");
+
+        gerarButton.setOnAction(event ->{
+           String textoCampo1 = campo1.getText();
+           String textoCampo2 = campo2.getText();
+           System.out.println("Campo 1: " + textoCampo1);
+           System.out.println("Campo 2: " + textoCampo2);
+            try {
+                TagGenerator.generatePdfFile(textoCampo1,textoCampo2);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+        });
 
         ImageView imageView1 = new ImageView(new Image("21251.png"));
         imageView1.setFitHeight(25);
