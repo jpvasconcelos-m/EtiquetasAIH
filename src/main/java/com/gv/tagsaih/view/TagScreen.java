@@ -1,6 +1,7 @@
 package com.gv.tagsaih.view;
 
 import com.gv.tagsaih.model.TagGenerator;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -13,6 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class TagScreen extends Application {
 
@@ -51,6 +53,7 @@ public class TagScreen extends Application {
         campo1.setPrefWidth(176);
         campo1.setLayoutX(180);
         campo1.setLayoutY(6);
+        campo1.setPromptText("Etiqueta Inicial");
         campo1.getStyleClass().add("no-border");
 
         TextField campo2 = new TextField();
@@ -58,6 +61,7 @@ public class TagScreen extends Application {
         campo2.setPrefWidth(176);
         campo2.setLayoutX(180);
         campo2.setLayoutY(52);
+        campo2.setPromptText("Etiqueta Final");
         campo2.getStyleClass().add("no-border");
 
         TextField campoNumero = new TextField();
@@ -92,10 +96,13 @@ public class TagScreen extends Application {
             if(isChecked){
                 campo2.setPrefWidth(100);
                 imageView2.setImage(new Image(getClass().getResourceAsStream("/8631648.png")));
+                campoNumero.setPromptText("Numero de Etiquetas");
+
             }
             else{
                 campo2.setPrefWidth(176);
                 imageView2.setImage(new Image(getClass().getResourceAsStream("/images.png")));
+                campo2.clear();
 
             }
         });
@@ -120,6 +127,14 @@ public class TagScreen extends Application {
 
         bottomPane.getChildren().addAll(campo1, campo2, campoNumero, gerarButton, imageView1, imageView2, checkBox);
         borderPane.setBottom(bottomPane);
+        PauseTransition pause = new PauseTransition(Duration.millis(1));
+
+        pause.setOnFinished(event -> {
+            // Foca na cena para remover o foco dos campos
+           gerarButton.requestFocus();
+        });
+        pause.play();
+
 
         // Criando a cena e configurando o palco
         Scene scene = new Scene(borderPane);
