@@ -51,7 +51,7 @@ public class TagScreen extends Application {
         TextField campo1 = new TextField();
         campo1.setPrefHeight(38);
         campo1.setPrefWidth(176);
-        campo1.setLayoutX(180);
+        campo1.setLayoutX(250);
         campo1.setLayoutY(6);
         campo1.setPromptText("Etiqueta Inicial");
         campo1.getStyleClass().add("no-border");
@@ -59,15 +59,15 @@ public class TagScreen extends Application {
         TextField campo2 = new TextField();
         campo2.setPrefHeight(37);
         campo2.setPrefWidth(176);
-        campo2.setLayoutX(180);
+        campo2.setLayoutX(250);
         campo2.setLayoutY(52);
         campo2.setPromptText("Etiqueta Final");
         campo2.getStyleClass().add("no-border");
 
         TextField campoNumero = new TextField();
         campoNumero.setPrefHeight(37);
-        campoNumero.setPrefWidth(60);
-        campoNumero.setLayoutX(180);
+        campoNumero.setPrefWidth(176);
+        campoNumero.setLayoutX(250);
         campoNumero.setLayoutY(52);
         campoNumero.getStyleClass().add("no-border");
         campoNumero.setVisible(false); // Inicialmente invisível
@@ -75,18 +75,18 @@ public class TagScreen extends Application {
         ImageView imageView1 = new ImageView(new Image("images.png"));
         imageView1.setFitHeight(25);
         imageView1.setFitWidth(22);
-        imageView1.setLayoutX(145);
+        imageView1.setLayoutX(220);
         imageView1.setLayoutY(13);
 
         ImageView imageView2 = new ImageView(new Image("images.png"));
         imageView2.setFitHeight(25);
         imageView2.setFitWidth(22);
-        imageView2.setLayoutX(145);
+        imageView2.setLayoutX(220);
         imageView2.setLayoutY(58);
 
 
         CheckBox checkBox = new CheckBox("Gerar usando Etq. inicial e Quantidade de etiquetas");
-        checkBox.setLayoutX(170);
+        checkBox.setLayoutX(210);
         checkBox.setLayoutY(100);
         checkBox.setOnAction(event -> {
             boolean isChecked = checkBox.isSelected();
@@ -94,7 +94,6 @@ public class TagScreen extends Application {
             campoNumero.setVisible(isChecked);
 
             if(isChecked){
-                campo2.setPrefWidth(100);
                 imageView2.setImage(new Image(getClass().getResourceAsStream("/8631648.png")));
                 campoNumero.setPromptText("Numero de Etiquetas");
 
@@ -108,8 +107,8 @@ public class TagScreen extends Application {
         });
 
         Button gerarButton = new Button("GERAR");
-        gerarButton.setLayoutX(225);
-        gerarButton.setLayoutY(130);
+        gerarButton.setLayoutX(290);
+        gerarButton.setLayoutY(135);
         gerarButton.getStyleClass().add("elegant-button");
 
         gerarButton.setOnAction(event -> {
