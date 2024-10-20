@@ -2,8 +2,8 @@ package com.gv.tagsaih.view;
 
 import com.gv.tagsaih.model.TagGenerator;
 import javafx.animation.PauseTransition;
+import javafx.animation.ScaleTransition;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -13,8 +13,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import static com.gv.tagsaih.view.button.ButtonAnimator.addButtonAnimations;
 
 public class TagScreen extends Application {
 
@@ -31,10 +34,10 @@ public class TagScreen extends Application {
         logo.setFitHeight(150);
         logo.setFitWidth(188);
 
-        Label titleLabel = new Label("Gerador de Etiquetas");
+        Label titleLabel = new Label("    Gerador de Etiquetas");
         titleLabel.setTextFill(javafx.scene.paint.Color.web("#2ecd70"));
-        titleLabel.setFont(Font.font("Impact", 36));
-        titleLabel.setFont(Font.font("Georgia", FontPosture.ITALIC, 36));
+        titleLabel.setFont(Font.font("Georgia", FontWeight.BOLD, FontPosture.ITALIC, 29));
+        titleLabel.setStyle("-fx-background-color: transparent; -fx-padding: 10; -fx-border-color: #2ecd70; -fx-border-width: 2; -fx-border-radius: 1;");
 
         AnchorPane.setLeftAnchor(logo, 0.0);
         AnchorPane.setRightAnchor(titleLabel, 0.0);
@@ -84,7 +87,6 @@ public class TagScreen extends Application {
         imageView2.setLayoutX(220);
         imageView2.setLayoutY(58);
 
-
         CheckBox checkBox = new CheckBox("Gerar usando Etq. inicial e Quantidade de etiquetas");
         checkBox.setLayoutX(210);
         checkBox.setLayoutY(100);
@@ -93,23 +95,24 @@ public class TagScreen extends Application {
             campo2.setVisible(!isChecked);
             campoNumero.setVisible(isChecked);
 
-            if(isChecked){
+            if (isChecked) {
                 imageView2.setImage(new Image(getClass().getResourceAsStream("/8631648.png")));
-                campoNumero.setPromptText("Numero de Etiquetas");
-
-            }
-            else{
+                campoNumero.setPromptText("Quantidade de Etiquetas");
+            } else {
                 campo2.setPrefWidth(176);
                 imageView2.setImage(new Image(getClass().getResourceAsStream("/images.png")));
                 campo2.clear();
-
             }
         });
 
         Button gerarButton = new Button("GERAR");
         gerarButton.setLayoutX(290);
         gerarButton.setLayoutY(135);
-        gerarButton.getStyleClass().add("elegant-button");
+        gerarButton.setPrefSize(100, 30); // Tamanho inicial ajustado
+        gerarButton.setStyle("-fx-background-color: #2ecd70; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;");
+
+        // Animações para o botão "GERAR"
+        addButtonAnimations(gerarButton);
 
         gerarButton.setOnAction(event -> {
             String textoCampo1 = campo1.getText();
@@ -123,17 +126,15 @@ public class TagScreen extends Application {
             }
         });
 
-
         bottomPane.getChildren().addAll(campo1, campo2, campoNumero, gerarButton, imageView1, imageView2, checkBox);
         borderPane.setBottom(bottomPane);
         PauseTransition pause = new PauseTransition(Duration.millis(1));
 
         pause.setOnFinished(event -> {
             // Foca na cena para remover o foco dos campos
-           gerarButton.requestFocus();
+            gerarButton.requestFocus();
         });
         pause.play();
-
 
         // Criando a cena e configurando o palco
         Scene scene = new Scene(borderPane);
@@ -142,8 +143,11 @@ public class TagScreen extends Application {
         scene.getStylesheets().add("caixaDeTexto.css");
         primaryStage.setScene(scene);
         primaryStage.setTitle("Gerador de Etiquetas");
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
+
+
 
     public static void main(String[] args) {
         launch(args);
