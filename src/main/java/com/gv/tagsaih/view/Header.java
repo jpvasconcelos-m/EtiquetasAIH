@@ -1,0 +1,34 @@
+package com.gv.tagsaih.view;
+
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
+
+public class Header {
+    public AnchorPane createHeader(){
+       AnchorPane topPane = new AnchorPane();
+       topPane.setPrefSize(600,165);
+
+        ImageView logo = new ImageView("ses.png");
+        logo.setFitHeight(150);
+        logo.setFitWidth(188);
+
+        Label titleLabel = new Label("     Gerador de Etiquetas");
+        titleLabel.setTextFill(javafx.scene.paint.Color.web("#2ecd70"));
+        titleLabel.setFont(Font.font("Georgia", FontWeight.BOLD, FontPosture.ITALIC, 29));
+        titleLabel.setStyle("-fx-background-color: transparent; -fx-padding: 10; -fx-border-color: #2ecd70; -fx-border-width: 2; -fx-border-radius: 1;");
+
+        AnchorPane.setLeftAnchor(logo, 0.0);
+        AnchorPane.setRightAnchor(titleLabel, 0.0);
+        AnchorPane.setTopAnchor(titleLabel, 75.0);
+        AnchorPane.setLeftAnchor(titleLabel, 202.0);
+
+        topPane.getChildren().addAll(logo, titleLabel);
+        return topPane;
+
+    }
+}

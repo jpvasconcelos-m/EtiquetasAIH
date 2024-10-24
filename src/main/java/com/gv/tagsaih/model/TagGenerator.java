@@ -12,39 +12,16 @@ import java.util.List;
 
 
 public class TagGenerator {
-
-
-    //Primeiramente, recebe os dados do FrontEnd.
-
-
-
     //TESTE:
+    /*
     public static void main(String[] args) throws Exception {
         Operates operates = new Operates();
         System.out.println(operates.operate(new Tag(26, 24, 11028345, 9),new Tag(26, 24, 11028370, 2)));
 //        generatePdfFile(new Tag(26, 24, 11028345, 9),new Tag(26, 24, 11028370, 2));
         convertStringToTag("26,24,10190148,7");
-
-
     }
+*/
 
-    private static void testarPdf() throws IOException, DocumentException {
-         //Configura tamanho da página:
-         Document document = new Document(new Rectangle(42f,98f),0,0,4,0);
-         //Rotaciona para paisagem:
-         document.setPageSize(document.getPageSize().rotate());
-         //Cria um arquivo pdf:
-         PdfWriter.getInstance(document, new FileOutputStream("teste.pdf"));
-
-         document.open();
-
-         Paragraph paragraph = new Paragraph("Teste - 1234");
-         paragraph.setAlignment(Paragraph.ALIGN_CENTER);
-         document.add(paragraph);
-         Desktop.getDesktop().open(new File("teste.pdf"));
-
-         document.close();
-    }
     public static Tag convertStringToTag(String tagString) {
         // Supondo que a string tem o formato "param1,param2,param3,param4"
         String[] parts = tagString.split(",");

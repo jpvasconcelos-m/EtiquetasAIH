@@ -16,7 +16,7 @@
          <children>
             <ImageView fitHeight="150.0" fitWidth="188.0">
                <image>
-                  <Image url="@ses-pe-secretaria-de-saude-do-estado-de-pernambuco.png" />
+                  <Image url="@ses.png" />
                </image>
             </ImageView>
             <Label layoutX="202.0" layoutY="75.0" text="Gerador de Etiquetas" textFill="#94dbc2">
