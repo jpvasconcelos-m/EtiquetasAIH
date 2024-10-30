@@ -1,4 +1,4 @@
-package com.gv.tagsaih.model.TextFormatting;
+package com.gv.tagsaih.model.textFormatting;
 
 public class StringFormatter {
     /*

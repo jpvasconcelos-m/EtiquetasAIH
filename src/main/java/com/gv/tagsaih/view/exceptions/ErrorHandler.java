@@ -1,4 +1,4 @@
-package com.gv.tagsaih.view.Exceptions;
+package com.gv.tagsaih.view.exceptions;
 
 import javafx.scene.control.Alert;
 

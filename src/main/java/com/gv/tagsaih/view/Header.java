@@ -17,15 +17,15 @@ public class Header {
         logo.setFitHeight(150);
         logo.setFitWidth(188);
 
-        Label titleLabel = new Label("     Gerador de Etiquetas");
+        Label titleLabel = new Label("Gerador de Etiquetas");
         titleLabel.setTextFill(javafx.scene.paint.Color.web("#2ecd70"));
         titleLabel.setFont(Font.font("Georgia", FontWeight.BOLD, FontPosture.ITALIC, 29));
-        titleLabel.setStyle("-fx-background-color: transparent; -fx-padding: 10; -fx-border-color: #2ecd70; -fx-border-width: 2; -fx-border-radius: 1;");
+        titleLabel.setStyle("-fx-background-color: transparent; -fx-padding: 10; -fx-border-color: #2ecd70; -fx-border-width: 2; -fx-border-radius: 10;");
 
         AnchorPane.setLeftAnchor(logo, 0.0);
-        AnchorPane.setRightAnchor(titleLabel, 0.0);
-        AnchorPane.setTopAnchor(titleLabel, 75.0);
-        AnchorPane.setLeftAnchor(titleLabel, 202.0);
+        AnchorPane.setRightAnchor(titleLabel, 50.0);
+        AnchorPane.setTopAnchor(titleLabel, 60.0);
+        AnchorPane.setLeftAnchor(titleLabel, 200.0);
 
         topPane.getChildren().addAll(logo, titleLabel);
         return topPane;
