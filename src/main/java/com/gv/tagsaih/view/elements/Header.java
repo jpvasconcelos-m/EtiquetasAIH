@@ -1,4 +1,4 @@
-package com.gv.tagsaih.view;
+package com.gv.tagsaih.view.elements;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
