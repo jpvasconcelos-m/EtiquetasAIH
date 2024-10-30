@@ -3,6 +3,7 @@ package com.gv.tagsaih.view;
 import com.gv.tagsaih.model.TagGenerator;
 import com.gv.tagsaih.model.textFormatting.StringFormatter;
 import com.gv.tagsaih.view.exceptions.ErrorHandler;
+import com.gv.tagsaih.view.exceptions.TagEndsWithZeroException;
 import javafx.animation.PauseTransition;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -96,15 +97,20 @@ public class InputArea {
 
             String field1Text = field1.getText().replace("-","");
             String field2Text = field2.isVisible() ? field2.getText().replace("-","") : numberField.getText();
+
             System.out.println("Campo 1: " + field1Text);
             System.out.println("Campo 2: " + field2Text);
             try {
+                if(field1Text.endsWith("0")){
+                    throw new TagEndsWithZeroException("A etiqueta termina com zero, informe a última aih impressa.");
+
+                }
+
                 if (numberField.isVisible()){
                     field1Text.replace("-","");
                     TagGenerator.generatePdfFile(stringFormatter.formatString(field1Text), Integer.parseInt(field2Text));
                 }
                 else
-
                  TagGenerator.generatePdfFile(stringFormatter.formatString(field1Text), stringFormatter.formatString(field2Text));
             } catch (Exception e) {
                 ErrorHandler.showError(e.getMessage());

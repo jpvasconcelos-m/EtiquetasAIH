@@ -10,7 +10,7 @@ public class StringFormatter {
     */
 
     public String formatString(String input){
-        if(input.length() <13) {
+        if(input.length() != 13) {
             throw new IllegalArgumentException("A etiqueta deve conter exatamente 13 dígitos, verifique a numeração e tente novamente.");
         }
 
