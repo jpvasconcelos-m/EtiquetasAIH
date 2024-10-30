@@ -13,6 +13,8 @@ module com.gv.etiquetasaih {
 
     exports com.gv.tagsaih.view;
     opens com.gv.tagsaih.view to javafx.fxml;
+    exports com.gv.tagsaih.view.elements;
+    opens com.gv.tagsaih.view.elements to javafx.fxml;
 
 
 }

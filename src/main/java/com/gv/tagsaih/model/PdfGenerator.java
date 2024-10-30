@@ -5,13 +5,14 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.util.List;
 
 
-public class TagGenerator {
+public class PdfGenerator {
     //TESTE:
     public static void main(String[] args) throws Exception {
         Operates operates = new Operates();
@@ -79,41 +80,59 @@ public class TagGenerator {
 
         document.close();
     }
-    public static void generatePdfFile(String stringTag1, Integer tagQuantity) throws Exception{
+    public static void generatePdfFile(String stringTag1, Integer tagQuantity) {
         //Configura tamanho da página:
         Document document = new Document(new Rectangle(42f,98f),0,0,4,0);
         //Rotaciona para paisagem:
         document.setPageSize(document.getPageSize().rotate());
         //Cria um arquivo pdf:
-        PdfWriter.getInstance(document, new FileOutputStream("teste.pdf"));
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream("teste.pdf"));
+        } catch (DocumentException e) {
+            throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         document.open();
 
 
         Operates operates = new Operates();
         Tag tag1 = convertStringToTag(stringTag1);
-        List<String> tags = operates.operatesWithTagQuantity(tag1,tagQuantity);
+        List<String> tags = null;
+        try {
+            tags = operates.operatesWithTagQuantity(tag1,tagQuantity);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         for (int i = 0; i < tags.size() ; i++) {
             document.newPage();
             Paragraph paragraph1 = new Paragraph(tags.get(i));
             paragraph1.setAlignment(Element.ALIGN_CENTER);
-            document.add(paragraph1);
+            try {
+                document.add(paragraph1);
+            } catch (DocumentException e) {
+                throw new RuntimeException(e);
+            }
 
             document.newPage();
             Paragraph paragraph2 = new Paragraph(tags.get(i) + " Cópia");
             paragraph2.setAlignment(Element.ALIGN_CENTER);
-            document.add(paragraph2);
+            try {
+                document.add(paragraph2);
+            } catch (DocumentException e) {
+                throw new RuntimeException(e);
+            }
 
         }
 
 
-
-
-
-
-
-        Desktop.getDesktop().open(new File("teste.pdf"));
+        try {
+            Desktop.getDesktop().open(new File("teste.pdf"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         document.close();
     }
