@@ -13,22 +13,20 @@ import java.util.List;
 
 public class TagGenerator {
     //TESTE:
-    /*
     public static void main(String[] args) throws Exception {
         Operates operates = new Operates();
         System.out.println(operates.operate(new Tag(26, 24, 11028345, 9),new Tag(26, 24, 11028370, 2)));
+        System.out.println(operates.operatesWithTagQuantity(new Tag(26, 24, 11028345, 9),100));
 //        generatePdfFile(new Tag(26, 24, 11028345, 9),new Tag(26, 24, 11028370, 2));
         convertStringToTag("26,24,10190148,7");
     }
-*/
+
 
     public static Tag convertStringToTag(String tagString) {
         // Supondo que a string tem o formato "param1,param2,param3,param4"
         String[] parts = tagString.split(",");
 
-        if (parts.length != 4) {
-            throw new IllegalArgumentException("A string deve conter exatamente 4 parâmetros separados por vírgula.");
-        }
+
 
         try {
             int param1 = Integer.parseInt(parts[0].trim());
@@ -38,7 +36,7 @@ public class TagGenerator {
 
             return new Tag(param1, param2, param3, param4);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Os parâmetros devem ser inteiros.", e);
+            throw new IllegalArgumentException("Os parâmetros devem ser apenas números!", e);
         }
     }
 
@@ -76,10 +74,52 @@ public class TagGenerator {
 
 
 
+
         Desktop.getDesktop().open(new File("teste.pdf"));
 
         document.close();
     }
+    public static void generatePdfFile(String stringTag1, Integer tagQuantity) throws Exception{
+        //Configura tamanho da página:
+        Document document = new Document(new Rectangle(42f,98f),0,0,4,0);
+        //Rotaciona para paisagem:
+        document.setPageSize(document.getPageSize().rotate());
+        //Cria um arquivo pdf:
+        PdfWriter.getInstance(document, new FileOutputStream("teste.pdf"));
+
+        document.open();
+
+
+        Operates operates = new Operates();
+        Tag tag1 = convertStringToTag(stringTag1);
+        List<String> tags = operates.operatesWithTagQuantity(tag1,tagQuantity);
+
+        for (int i = 0; i < tags.size() ; i++) {
+            document.newPage();
+            Paragraph paragraph1 = new Paragraph(tags.get(i));
+            paragraph1.setAlignment(Element.ALIGN_CENTER);
+            document.add(paragraph1);
+
+            document.newPage();
+            Paragraph paragraph2 = new Paragraph(tags.get(i) + " Cópia");
+            paragraph2.setAlignment(Element.ALIGN_CENTER);
+            document.add(paragraph2);
+
+        }
+
+
+
+
+
+
+
+        Desktop.getDesktop().open(new File("teste.pdf"));
+
+        document.close();
+    }
+
+
+
 
 
 
