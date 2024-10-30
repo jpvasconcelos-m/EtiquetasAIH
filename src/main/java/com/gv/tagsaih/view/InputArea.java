@@ -1,6 +1,8 @@
 package com.gv.tagsaih.view;
 
 import com.gv.tagsaih.model.TagGenerator;
+import com.gv.tagsaih.model.TextFormatting.StringFormatter;
+import com.gv.tagsaih.view.Exceptions.ErrorHandler;
 import javafx.animation.PauseTransition;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -13,6 +15,10 @@ import javafx.util.Duration;
 import static com.gv.tagsaih.view.button.ButtonAnimator.addButtonAnimations;
 
 public class InputArea {
+
+    static StringFormatter stringFormatter = new StringFormatter();
+
+
     public AnchorPane createInputArea() {
         AnchorPane bottomPane = new AnchorPane();
         bottomPane.setPrefSize(600, 200);
@@ -80,14 +86,21 @@ public class InputArea {
         addButtonAnimations(button);
 
         button.setOnAction(event -> {
-            String textoCampo1 = campo1.getText();
-            String textoCampo2 = campo2.isVisible() ? campo2.getText() : campoNumero.getText();
+
+            String textoCampo1 = campo1.getText().replace("-","");
+            String textoCampo2 = campo2.isVisible() ? campo2.getText().replace("-","") : campoNumero.getText();
             System.out.println("Campo 1: " + textoCampo1);
             System.out.println("Campo 2: " + textoCampo2);
             try {
-                TagGenerator.generatePdfFile(textoCampo1, textoCampo2);
+                if (campoNumero.isVisible()){
+                    textoCampo1.replace("-","");
+                    TagGenerator.generatePdfFile(stringFormatter.formatString(textoCampo1), Integer.parseInt(textoCampo2));
+                }
+                else
+
+                 TagGenerator.generatePdfFile(stringFormatter.formatString(textoCampo1), stringFormatter.formatString(textoCampo2));
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                ErrorHandler.showError(e.getMessage());
             }
         });
 
