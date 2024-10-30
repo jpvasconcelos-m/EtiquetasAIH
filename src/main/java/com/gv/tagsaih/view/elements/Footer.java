@@ -1,4 +1,4 @@
-package com.gv.tagsaih.view;
+package com.gv.tagsaih.view.elements;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
