@@ -92,6 +92,36 @@ public class Operates {
         // Retorna a lista de tags formatadas
         return formattedTags;
     }
+    public List<String> operatesWithTagQuantity(Tag initialTag, int tagQuantity) throws Exception {
+        List<String> tags = new ArrayList<>();
 
+        // Adiciona elementos à lista circular até que seu tamanho seja 11
+        while (circleList.size() < 11) {
+            cyclics.forEach(num -> {
+                try {
+                    circleList.add(num);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
+
+        int aihInitCod = initialTag.unitCode();
+        String codeYText = Integer.toString(aihInitCod);
+        int aihYear = initialTag.year();
+        String yearText = Integer.toString(aihYear);
+        boolean isCyclic = isCyclics.test(initialTag);
+
+        Node nodeAtIndex = circleList.getNodeAtIndex(initialTag.cyclicDigit() + 1);
+
+        for (int i = 0; i < tagQuantity; i++) {
+            String formattedTag = codeYText + yearText + (initialTag.increasingDigit() + i) + "-" + nodeAtIndex.data;
+            tags.add(formattedTag);
+            nodeAtIndex = circleList.getNext(nodeAtIndex);
+        }
+
+        return tags;
+    }
 
 }
+
