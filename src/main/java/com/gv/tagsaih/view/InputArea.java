@@ -78,7 +78,7 @@ public class InputArea {
         });
     }
 
-    private void configureGenerateButton(Button button, TextField campo1, TextField campo2, TextField campoNumero) {
+    private void configureGenerateButton(Button button, TextField field1, TextField field2, TextField numberField) {
         button.setLayoutX(290);
         button.setLayoutY(135);
         button.setPrefSize(100, 30);
@@ -87,18 +87,18 @@ public class InputArea {
 
         button.setOnAction(event -> {
 
-            String textoCampo1 = campo1.getText().replace("-","");
-            String textoCampo2 = campo2.isVisible() ? campo2.getText().replace("-","") : campoNumero.getText();
-            System.out.println("Campo 1: " + textoCampo1);
-            System.out.println("Campo 2: " + textoCampo2);
+            String field1Text = field1.getText().replace("-","");
+            String field2Text = field2.isVisible() ? field2.getText().replace("-","") : numberField.getText();
+            System.out.println("Campo 1: " + field1Text);
+            System.out.println("Campo 2: " + field2Text);
             try {
-                if (campoNumero.isVisible()){
-                    textoCampo1.replace("-","");
-                    TagGenerator.generatePdfFile(stringFormatter.formatString(textoCampo1), Integer.parseInt(textoCampo2));
+                if (numberField.isVisible()){
+                    field1Text.replace("-","");
+                    TagGenerator.generatePdfFile(stringFormatter.formatString(field1Text), Integer.parseInt(field2Text));
                 }
                 else
 
-                 TagGenerator.generatePdfFile(stringFormatter.formatString(textoCampo1), stringFormatter.formatString(textoCampo2));
+                 TagGenerator.generatePdfFile(stringFormatter.formatString(field1Text), stringFormatter.formatString(field2Text));
             } catch (Exception e) {
                 ErrorHandler.showError(e.getMessage());
             }
