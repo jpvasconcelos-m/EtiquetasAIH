@@ -1,6 +1,7 @@
 package com.gv.tagsaih.view.elements;
 
 import com.gv.tagsaih.model.PdfGenerator;
+import com.gv.tagsaih.model.utils.Logger;
 import com.gv.tagsaih.model.utils.StringFormatter;
 import com.gv.tagsaih.view.button.ButtonAnimator;
 import com.gv.tagsaih.view.exceptions.ErrorHandler;
@@ -101,17 +102,21 @@ public class InputArea {
     }
 
     private void configureGenerateButton(Button button, TextField field1, TextField field2,TextField field3, TextField numberField) {
+        Logger logger = new Logger();
         button.setLayoutX(280);
         button.setLayoutY(130);
         button.setPrefSize(100, 30);
         button.setStyle("-fx-background-color: #2ecd70; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;");
+        field3.setText(logger.getLastEntry());
         addButtonAnimations(button);
 
         button.setOnAction(event -> {
 
+
             String field1Text = field1.getText().replace("-","").replace(" ", "");
             String field2Text = field2.isVisible() ? field2.getText().replace("-","").replace(" ","") : numberField.getText();
             String field3Text = field3.getText().replace("-","");
+
 
 
             boolean isField2Incorrect = field2Text.length()!=13 && !numberField.isVisible();
@@ -178,7 +183,7 @@ public class InputArea {
                 ErrorHandler.showMessageDialog("Informações insuficientes.", "Informe a última AIH impressa");
             }
 
-
+            field3.setText(logger.getLastEntry());
         });
 
         PauseTransition pause = new PauseTransition(Duration.millis(1));

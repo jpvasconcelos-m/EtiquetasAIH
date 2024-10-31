@@ -1,6 +1,7 @@
 package com.gv.tagsaih.model;
 
 
+import com.gv.tagsaih.model.utils.Logger;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 
@@ -13,6 +14,11 @@ import java.util.List;
 
 
 public class PdfGenerator {
+
+
+    Logger logger = new Logger();
+
+
     //TESTE:
     public static void main(String[] args) throws Exception {
         Operates operates = new Operates();
@@ -78,7 +84,8 @@ public class PdfGenerator {
 
 
         Desktop.getDesktop().open(new File("teste.pdf"));
-
+        Logger logger = new Logger();
+        logger.log(tags);
         document.close();
     } public static void generatePdfFile(String stringPreviousTag,String stringTag1, String stringTag2) throws Exception{
         //Configura tamanho da página:
@@ -117,6 +124,8 @@ public class PdfGenerator {
 
 
         Desktop.getDesktop().open(new File("teste.pdf"));
+        Logger logger = new Logger();
+        logger.log(tags);
 
         document.close();
     }
@@ -173,7 +182,8 @@ public class PdfGenerator {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
+        Logger logger = new Logger();
+        logger.log(tags);
         document.close();
     }public static void generatePdfFile(String stringPreviousTag,String stringTag1, Integer tagQuantity) {
         //Configura tamanho da página:
@@ -230,6 +240,10 @@ public class PdfGenerator {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        Logger logger = new Logger();
+        logger.log(tags);
+
 
         document.close();
     }
