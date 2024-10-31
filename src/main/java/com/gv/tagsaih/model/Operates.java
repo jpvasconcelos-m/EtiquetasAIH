@@ -119,7 +119,8 @@ public class Operates {
         }
 
         return tags;
-    }public List<String> operatesWithTagQuantity(Tag previousTag,Tag initialTag, int tagQuantity) throws Exception {
+    }
+    public List<String> operatesWithTagQuantity(Tag previousTag, Tag initialTag, int tagQuantity) throws Exception {
         List<String> tags = new ArrayList<>();
 
         // Adiciona elementos à lista circular até que seu tamanho seja 11
@@ -138,22 +139,25 @@ public class Operates {
         int aihYear = initialTag.year();
         String yearText = Integer.toString(aihYear);
         boolean isCyclic = isCyclics.test(initialTag);
-        if (previousTag.cyclicDigit() == 9) {
-            Node currentNode = circleList.getHead();
-            for (String element : hgvAih) {
-                String formattedTag = codeYText + yearText + element + "-" + currentNode.data;
-                formattedTags.add(formattedTag);
-                currentNode = circleList.getNext(currentNode);
+
+        // Determine o nó de início com base na condição cíclica
+        Node nodeAtIndex;
+        if (!isCyclic) {
+            nodeAtIndex = circleList.getNodeAtIndex(initialTag.cyclicDigit() + 1);
+        } else {
+            // Se o Tag anterior é cíclico, inicie do início da lista
+            if (previousTag.cyclicDigit() == 9) {
+                nodeAtIndex = circleList.getHead();
+            } else {
+                nodeAtIndex = circleList.getNodeAtIndex(initialTag.cyclicDigit() + 1);
             }
         }
-else {
-            Node nodeAtIndex = circleList.getNodeAtIndex(initialTag.cyclicDigit() + 1);
 
-            for (int i = 0; i < tagQuantity; i++) {
-                String formattedTag = codeYText + yearText + (initialTag.increasingDigit() + i) + "-" + nodeAtIndex.data;
-                tags.add(formattedTag);
-                nodeAtIndex = circleList.getNext(nodeAtIndex);
-            }
+        // Gera as tags formatadas
+        for (int i = 0; i < tagQuantity; i++) {
+            String formattedTag = codeYText + yearText + (initialTag.increasingDigit() + i) + "-" + nodeAtIndex.data;
+            tags.add(formattedTag);
+            nodeAtIndex = circleList.getNext(nodeAtIndex);
         }
 
         return tags;

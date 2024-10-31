@@ -115,32 +115,58 @@ public class InputArea {
 
 
             boolean isField2Incorrect = field2Text.length()!=13 && !numberField.isVisible();
-            boolean isField3InCorrect = field3Text.length()!=13  || field3Text.isBlank();
+            boolean isField3Incorrect = field3Text.length()!=13  || field3Text.isBlank();
 
 
             System.out.println("Campo 1: " + field1Text);
             System.out.println("Campo 2: " + field2Text);
             try {
+
+                //Para Campo 2 Com Etiqueta Final:
                 if(field1Text.length()!=13||isField2Incorrect){
+                    System.out.println("oi");
                     throw new IncorrectTagSizeException();
                 }
-                if (field1Text.endsWith("0") && isField3InCorrect) {
-
-                        throw new TagEndsWithZeroException();// Impede que a ação continue
-
+                if (field1Text.endsWith("0") && isField3Incorrect) {
+                    throw new TagEndsWithZeroException();
                 }
+                //Para campo 2 com quantidade de etiquetas:
                 else if (numberField.isVisible()){
-                    field1Text.replace("-","");
-                    PdfGenerator.generatePdfFile(stringFormatter.formatString(field1Text), Integer.parseInt(field2Text));
+                    //--Campo 3 em branco e campo 1 termina em 0 --> Joga exceção
+                    if(field3Text.isBlank()&&field1Text.endsWith("0")){
+                        field1Text.replace("-","");
+                        throw new TagEndsWithZeroException();
+                    //--Campo 3 no tamanho incoreto e campo 1 termina em zero     --> Joga exceção
+                    }  if(field3Text.length()!=13&&field1Text.endsWith("0")){
+                        field1Text.replace("-","");
+                        throw new IncorrectTagSizeException();
+                    }
+                        //--Campo 3 no tamanho certo e campo 1 termina em zero --> Procede
+                    else if (field3Text.length()==13 && field1Text.endsWith("0")) {
+                        field1Text.replace("-","");
+                        field3Text.replace("-","");
+                        PdfGenerator.generatePdfFile(stringFormatter.formatString(field3Text),stringFormatter.formatString(field1Text),Integer.parseInt(field2Text));
+                    } else {
+                        field1Text.replace("-","");
+                        PdfGenerator.generatePdfFile(stringFormatter.formatString(field1Text), Integer.parseInt(field2Text));
+
+                    }
+                }
+                else if(field1Text.endsWith("0")&&!isField3Incorrect){
+                    try {
+                        PdfGenerator.generatePdfFile(stringFormatter.formatString(field3Text),stringFormatter.formatString(field1Text),stringFormatter.formatString(field2Text));
+                    } catch (Exception e) {
+                        ErrorHandler.showMessageDialog("Erro",e.getMessage());
+                    }
                 }
                 else {
                     try {
                         PdfGenerator.generatePdfFile(stringFormatter.formatString(field1Text), stringFormatter.formatString(field2Text));
+
                     } catch (Exception e) {
                         ErrorHandler.showMessageDialog("Erro", e.getMessage());
                     }
                 }
-
             }
             catch (IncorrectTagSizeException e){
                 ErrorHandler.showMessageDialog("Erro",e.getMessage());
