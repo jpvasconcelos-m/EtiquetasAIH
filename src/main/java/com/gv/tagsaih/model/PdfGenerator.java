@@ -17,7 +17,7 @@ public class PdfGenerator {
     public static void main(String[] args) throws Exception {
         Operates operates = new Operates();
         System.out.println(operates.operate(new Tag(26, 24, 11028345, 9),new Tag(26, 24, 11028370, 2)));
-        System.out.println(operates.operatesWithTagQuantity(new Tag(26, 24, 11028345, 9),100));
+       // System.out.println(operates.operatesWithTagQuantity(new Tag(26, 24, 11028345, 9),100));
 //        generatePdfFile(new Tag(26, 24, 11028345, 9),new Tag(26, 24, 11028370, 2));
         convertStringToTag("26,24,10190148,7");
     }
