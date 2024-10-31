@@ -18,6 +18,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
+import java.util.function.UnaryOperator;
+
 import static com.gv.tagsaih.view.button.ButtonAnimator.addButtonAnimations;
 
 public class InputArea {
@@ -29,11 +31,14 @@ public class InputArea {
         AnchorPane bottomPane = new AnchorPane();
         bottomPane.setPrefSize(600, 200);
 
-        TextField field1 = createTextField("Etiqueta Inicial", 6);
-        TextField field2 = createTextField("Etiqueta Final", 52);
-        TextField field3 = createTextField("Última Etiqueta Impressa",20,26);
-        TextField campoNumero = createTextField("Quantidade de Etiquetas", 52);
+        TextField field1 = createNumericTextField("Etiqueta Inicial", 6);
+        TextField field2 = createNumericTextField("Etiqueta Final", 52);
+        TextField field3 = createNumericTextField("Última Etiqueta Impressa", 20, 26);
+        TextField campoNumero = createNumericTextField("Quantidade de Etiquetas", 52);
         campoNumero.setVisible(false); // Inicialmente invisível
+
+
+
 
         ImageView imageView1 = createImageView("images.png", 220, 6);
         ImageView imageView2 = createImageView("images.png", 220, 50);
@@ -189,6 +194,40 @@ public class InputArea {
         PauseTransition pause = new PauseTransition(Duration.millis(1));
         pause.setOnFinished(event -> button.requestFocus());
         pause.play();
+    }
+    private TextField createNumericTextField(String promptText, double layoutX, double layoutY) {
+        TextField textField = createTextField(promptText, layoutX, layoutY);
+        setNumericTextFormatter(textField);
+        return textField;
+    }
+    private void setNumericTextFormatter(TextField textField) {
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            if (change.getControlNewText().isEmpty() || change.getControlText().isEmpty()) {
+                return change; // Permite a remoção ou colagem
+            }
+
+            // Permite apenas números e hífens
+            String newText = change.getControlNewText();
+            if (newText.matches("[\\d-]*")) {
+                return change; // Permite a mudança
+            }
+
+            return null; // Ignora a mudança se não for numérico ou hífen
+        };
+
+        textField.setTextFormatter(new TextFormatter<>(filter));
+
+        // Adiciona listener para impedir entrada de letras
+        textField.setOnKeyTyped(event -> {
+            if (!Character.isDigit(event.getCharacter().charAt(0)) && !event.getCharacter().equals("-")) {
+                event.consume(); // Impede a entrada de caracteres não numéricos
+            }
+        });
+    }
+    private TextField createNumericTextField(String promptText, double layoutY) {
+        TextField textField = createTextField(promptText, layoutY);
+        setNumericTextFormatter(textField);
+        return textField;
     }
 
 
