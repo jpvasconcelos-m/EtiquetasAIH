@@ -115,6 +115,7 @@ public class InputArea {
 
 
             boolean isField2Incorrect = field2Text.length()!=13 && !numberField.isVisible();
+            boolean isField3InCorrect = field3Text.length()!=13  || field3Text.isBlank();
 
 
             System.out.println("Campo 1: " + field1Text);
@@ -123,8 +124,10 @@ public class InputArea {
                 if(field1Text.length()!=13||isField2Incorrect){
                     throw new IncorrectTagSizeException();
                 }
-                if (field1Text.endsWith("0")) {
-                    throw new TagEndsWithZeroException();  // Impede que a ação continue
+                if (field1Text.endsWith("0") && isField3InCorrect) {
+
+                        throw new TagEndsWithZeroException();// Impede que a ação continue
+
                 }
                 else if (numberField.isVisible()){
                     field1Text.replace("-","");
@@ -134,19 +137,19 @@ public class InputArea {
                     try {
                         PdfGenerator.generatePdfFile(stringFormatter.formatString(field1Text), stringFormatter.formatString(field2Text));
                     } catch (Exception e) {
-                        ErrorHandler.showError(e.getMessage());
+                        ErrorHandler.showMessageDialog("Erro", e.getMessage());
                     }
                 }
 
             }
             catch (IncorrectTagSizeException e){
-                ErrorHandler.showError(e.getMessage());
+                ErrorHandler.showMessageDialog("Erro",e.getMessage());
             }
 
 
             catch (TagEndsWithZeroException e) {
                 // Aqui chamamos o showInputDialog se a exceção for de TagEndsWithZeroException
-                showMessageDialog("Informações insuficientes.", "Informe a última AIH impressa");
+                ErrorHandler.showMessageDialog("Informações insuficientes.", "Informe a última AIH impressa");
             }
 
 
@@ -157,35 +160,5 @@ public class InputArea {
         pause.play();
     }
 
-    private void showMessageDialog(String title, String message) {
-        Dialog<Void> dialog = new Dialog<>();
-        dialog.setTitle(title);
-        dialog.setHeaderText(null);
 
-        // Configurando o layout do dialog
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(20);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 20, 10, 20));
-
-        // Adicionando um label com a mensagem
-        Label messageLabel = new Label(message);
-        messageLabel.setWrapText(true); // Permite que a mensagem quebre a linha
-        grid.add(messageLabel, 0, 0);
-
-        // Estilizando o botão OK
-        ButtonType okButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().add(okButtonType);
-
-        // Adicionando uma estilização ao botão
-        Button okButton = (Button) dialog.getDialogPane().lookupButton(okButtonType);
-        okButton.setStyle("-fx-background-color: #2ecd70; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;");
-        ButtonAnimator.addButtonAnimations(okButton);
-
-        dialog.getDialogPane().setContent(grid);
-
-        // Mostrando o diálogo
-        dialog.showAndWait();
-    }
 }
