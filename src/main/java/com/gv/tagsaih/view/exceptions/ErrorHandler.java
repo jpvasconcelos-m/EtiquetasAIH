@@ -1,31 +1,48 @@
 package com.gv.tagsaih.view.exceptions;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
+import com.gv.tagsaih.view.button.ButtonAnimator;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 
 public class ErrorHandler {
     public static void showError(String message){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Erro");
-        alert.setHeaderText("Uma exceção ocorreu");
+        alert.setHeaderText("Um erro ocorreu.");
         alert.setContentText(message);
         alert.showAndWait();
     }
-    private void showTagEndsWithZeroPopup() {
-        // Cria um novo TextField para o popup
-        TextField newTextField = new TextField();
-        newTextField.setPromptText("Informe a última etiqueta impressa");
+    public static void showMessageDialog(String title, String message) {
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle(title);
+        dialog.setHeaderText(null);
 
-        // Cria o alerta
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Etiqueta Inválida");
-        alert.setHeaderText("A etiqueta termina com zero.");
-        alert.setContentText("Por favor, informe a última etiqueta impressa:");
+        // Configurando o layout do dialog
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(20);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 20, 10, 20));
 
-        // Adiciona o TextField ao diálogo
-        alert.getDialogPane().setContent(newTextField);
+        // Adicionando um label com a mensagem
+        Label messageLabel = new Label(message);
+        messageLabel.setWrapText(true); // Permite que a mensagem quebre a linha
+        grid.add(messageLabel, 0, 0);
 
-        // Exibe o alerta e espera pela resposta do usuário
-        alert.showAndWait();
+        // Estilizando o botão OK
+        ButtonType okButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(okButtonType);
+
+        // Adicionando uma estilização ao botão
+        Button okButton = (Button) dialog.getDialogPane().lookupButton(okButtonType);
+        okButton.setStyle("-fx-background-color: #2ecd70; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;");
+        ButtonAnimator.addButtonAnimations(okButton);
+
+        dialog.getDialogPane().setContent(grid);
+
+        // Mostrando o diálogo
+        dialog.showAndWait();
     }
 }

@@ -1,4 +1,6 @@
-package com.gv.tagsaih.model.textFormatting;
+package com.gv.tagsaih.model.utils;
+
+import com.gv.tagsaih.view.exceptions.IncorrectTagSizeException;
 
 public class StringFormatter {
     /*
@@ -10,8 +12,8 @@ public class StringFormatter {
     */
 
     public String formatString(String input){
-        if(input.length() != 13) {
-            throw new IllegalArgumentException("A etiqueta deve conter exatamente 13 dígitos, verifique a numeração e tente novamente.");
+        if(input.length() <13) {
+            throw new IncorrectTagSizeException("A etiqueta deve conter exatamente 13 dígitos, verifique a numeração e tente novamente.");
         }
 
 

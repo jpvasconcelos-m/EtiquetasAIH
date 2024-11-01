@@ -1,4 +1,6 @@
 package com.gv.tagsaih.view;
+import com.gv.tagsaih.view.elements.Header;
+import com.gv.tagsaih.view.elements.InputArea;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
