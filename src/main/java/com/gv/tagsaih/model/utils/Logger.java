@@ -1,5 +1,8 @@
 package com.gv.tagsaih.model.utils;
 
+import com.gv.tagsaih.model.Operates;
+import com.gv.tagsaih.model.Tag;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -15,6 +18,7 @@ public class Logger {
 
     private static final String FILE_NAME = "log.txt";
     private static final int MAX_ENTRIES = 1000;
+    Operates operates = new Operates();
 
     public void log(List<String> entries) {
         try {
@@ -70,6 +74,10 @@ public class Logger {
         return null; // Retorna null se não houver entradas
     }
 
+
+
+
+
     private String removeTimestamp(String entry) {
         return entry.substring(entry.indexOf(" - ") + 3);
     }
@@ -78,5 +86,7 @@ public class Logger {
         Logger logger = new Logger();
         logger.log(List.of("Primeira entrada", "Segunda entrada", "Terceira entrada"));
 
+
     }
+
 }

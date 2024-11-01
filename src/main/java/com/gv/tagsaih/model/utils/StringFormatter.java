@@ -1,8 +1,26 @@
 package com.gv.tagsaih.model.utils;
 
+import com.gv.tagsaih.model.Tag;
 import com.gv.tagsaih.view.exceptions.IncorrectTagSizeException;
 
 public class StringFormatter {
+    public static Tag convertStringToTag(String tagString) {
+        // Supondo que a string tem o formato "param1,param2,param3,param4"
+        String[] parts = tagString.split(",");
+
+
+
+        try {
+            int param1 = Integer.parseInt(parts[0].trim());
+            int param2 = Integer.parseInt(parts[1].trim());
+            int param3 = Integer.parseInt(parts[2].trim());
+            int param4 = Integer.parseInt(parts[3].trim());
+
+            return new Tag(param1, param2, param3, param4);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Os parâmetros devem ser apenas números!", e);
+        }
+    }
     /*
     public static void main(String[] args) {
         String input = "2624110283702";
@@ -11,9 +29,9 @@ public class StringFormatter {
     }
     */
 
-    public String formatString(String input){
+    public static String formatString(String input){
         if(input.length() <13) {
-            throw new IncorrectTagSizeException("A etiqueta deve conter exatamente 13 dígitos, verifique a numeração e tente novamente.");
+
         }
 
 

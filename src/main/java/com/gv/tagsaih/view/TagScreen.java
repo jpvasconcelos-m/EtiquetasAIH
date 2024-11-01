@@ -15,16 +15,16 @@ public class TagScreen extends Application {
         borderPane.setPrefSize(600, 400);
 
         Header header = new Header();
-        borderPane.setTop(header.createHeader());
+        borderPane.setLeft(header.createHeader());
 
         InputArea inputArea = new InputArea();
         borderPane.setBottom(inputArea.createInputArea());
 
         Scene scene = new Scene(borderPane);
-        primaryStage.getIcons().add(new Image("icone.png"));
+        primaryStage.getIcons().add(new Image("taggerIco.png"));
         scene.getStylesheets().add("caixaDeTexto.css");
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Gerador de Etiquetas");
+        primaryStage.setTitle("Tagger - Gerador de Etiquetas AIH");
         primaryStage.setResizable(false);
         primaryStage.show();
     }

@@ -21,7 +21,7 @@
     -fx-text-fill: white; /* Cor do texto */
     -fx-font-size: 14px; /* Tamanho da fonte */
     -fx-padding: 10 20; /* Margem interna (topo/bottom, esquerda/direita) */
-    -fx-border-radius: 5; /* Cantos arredondados */
+    -fx-border-radius: 10; /* Cantos arredondados */
     -fx-background-radius: 5; /* Cantos arredondados do fundo */
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 1); /* Sombra */
 }

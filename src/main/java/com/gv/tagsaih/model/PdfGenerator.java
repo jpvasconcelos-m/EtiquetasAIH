@@ -2,6 +2,7 @@ package com.gv.tagsaih.model;
 
 
 import com.gv.tagsaih.model.utils.Logger;
+import com.gv.tagsaih.model.utils.StringFormatter;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 
@@ -26,27 +27,9 @@ public class PdfGenerator {
        // System.out.println(operates.operatesWithTagQuantity(new Tag(26, 24, 11028345, 9),100));
         System.out.println(operates.operatesWithTagQuantity(new Tag(26,24,10190148,0),new Tag(26,24,10190147,9),50));
         generatePdfFile("26,24,10190148,9","26,24,10190147,0",20);
-        convertStringToTag("26,24,10190148,7");
+        StringFormatter.convertStringToTag("26,24,10190148,7");
     }
 
-
-    public static Tag convertStringToTag(String tagString) {
-        // Supondo que a string tem o formato "param1,param2,param3,param4"
-        String[] parts = tagString.split(",");
-
-
-
-        try {
-            int param1 = Integer.parseInt(parts[0].trim());
-            int param2 = Integer.parseInt(parts[1].trim());
-            int param3 = Integer.parseInt(parts[2].trim());
-            int param4 = Integer.parseInt(parts[3].trim());
-
-            return new Tag(param1, param2, param3, param4);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Os parâmetros devem ser apenas números!", e);
-        }
-    }
 
     public static void generatePdfFile(String stringTag1, String stringTag2) throws Exception{
         //Configura tamanho da página:
@@ -60,8 +43,8 @@ public class PdfGenerator {
 
 
        Operates operates = new Operates();
-       Tag tag1 = convertStringToTag(stringTag1);
-       Tag tag2 = convertStringToTag(stringTag2);
+       Tag tag1 = StringFormatter.convertStringToTag(stringTag1);
+       Tag tag2 = StringFormatter.convertStringToTag(stringTag2);
         List<String> tags = operates.operate(tag1,tag2);
 
         for (int i = 0; i < tags.size() ; i++) {
@@ -99,9 +82,9 @@ public class PdfGenerator {
 
 
        Operates operates = new Operates();
-       Tag previousTag = convertStringToTag(stringPreviousTag);
-       Tag tag1 = convertStringToTag(stringTag1);
-       Tag tag2 = convertStringToTag(stringTag2);
+       Tag previousTag = StringFormatter.convertStringToTag(stringPreviousTag);
+       Tag tag1 = StringFormatter.convertStringToTag(stringTag1);
+       Tag tag2 = StringFormatter.convertStringToTag(stringTag2);
         List<String> tags = operates.operate(previousTag,tag1,tag2);
 
         for (int i = 0; i < tags.size() ; i++) {
@@ -147,7 +130,7 @@ public class PdfGenerator {
 
 
         Operates operates = new Operates();
-        Tag tag1 = convertStringToTag(stringTag1);
+        Tag tag1 = StringFormatter.convertStringToTag(stringTag1);
         List<String> tags = null;
         try {
             tags = operates.operatesWithTagQuantity(tag1,tagQuantity);
@@ -203,8 +186,8 @@ public class PdfGenerator {
 
 
         Operates operates = new Operates();
-        Tag tag1 = convertStringToTag(stringTag1);
-        Tag previousTag = convertStringToTag(stringPreviousTag);
+        Tag tag1 = StringFormatter.convertStringToTag(stringTag1);
+        Tag previousTag = StringFormatter.convertStringToTag(stringPreviousTag);
         List<String> tags = null;
         try {
             tags = operates.operatesWithTagQuantity(previousTag,tag1,tagQuantity);

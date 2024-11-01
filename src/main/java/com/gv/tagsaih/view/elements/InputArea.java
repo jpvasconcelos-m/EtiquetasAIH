@@ -1,22 +1,24 @@
 package com.gv.tagsaih.view.elements;
 
+import com.gv.tagsaih.model.Operates;
 import com.gv.tagsaih.model.PdfGenerator;
 import com.gv.tagsaih.model.utils.Logger;
 import com.gv.tagsaih.model.utils.StringFormatter;
-import com.gv.tagsaih.view.button.ButtonAnimator;
 import com.gv.tagsaih.view.exceptions.ErrorHandler;
 import com.gv.tagsaih.view.exceptions.TagEndsWithZeroException;
 import com.gv.tagsaih.view.exceptions.IncorrectTagSizeException;
 import javafx.animation.PauseTransition;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
+import org.apache.commons.logging.Log;
 
 import java.util.function.UnaryOperator;
 
@@ -25,28 +27,35 @@ import static com.gv.tagsaih.view.button.ButtonAnimator.addButtonAnimations;
 public class InputArea {
 
     static StringFormatter stringFormatter = new StringFormatter();
+    Operates operates = new Operates();
+    static Logger logger = new Logger();
 
 
     public AnchorPane createInputArea() {
+
         AnchorPane bottomPane = new AnchorPane();
         bottomPane.setPrefSize(600, 200);
 
+
+
         TextField field1 = createNumericTextField("Etiqueta Inicial", 6);
         TextField field2 = createNumericTextField("Etiqueta Final", 52);
-        TextField field3 = createNumericTextField("Última Etiqueta Impressa", 20, 26);
+        TextField field3 = createNumericTextField("Última Etiqueta Impressa", 1000, -90);
         TextField campoNumero = createNumericTextField("Quantidade de Etiquetas", 52);
         campoNumero.setVisible(false); // Inicialmente invisível
+        Text textLastAIH = new Text("Última AIH Gerada:");
+        textLastAIH.setFont(Font.font("Univers", FontWeight.BOLD,15));
+        textLastAIH.setLayoutX(field3.getLayoutX()+25);
+        textLastAIH.setLayoutY(field3.getLayoutY()-3);
 
 
-
-
-        ImageView imageView1 = createImageView("images.png", 220, 6);
-        ImageView imageView2 = createImageView("images.png", 220, 50);
-        ImageView imageView3 = createImageView("clock.png", 95, -15);
+        ImageView imageView1 = createImageView("images.png", field1.getLayoutX()-30, field1.getLayoutY()+10);
+        ImageView imageView2 = createImageView("images.png", field2.getLayoutX()-30, field2.getLayoutY()+10);
+        ImageView imageView3 = createImageView("clock.png", field3.getLayoutX()+83, field3.getLayoutY()-50);
 
         CheckBox checkBox = new CheckBox("Gerar usando Etq. inicial e Quantidade de etiquetas");
-        checkBox.setLayoutX(210);
-        checkBox.setLayoutY(100);
+        checkBox.setLayoutX(300);
+        checkBox.setLayoutY(63);
         configureCheckBox(checkBox, field2, campoNumero, imageView2);
 
         HBox footer = Footer.createFooter();
@@ -57,8 +66,9 @@ public class InputArea {
 
         Button gerarButton = new Button("GERAR");
         configureGenerateButton(gerarButton, field1, field2, field3,campoNumero);
+       // checkBox.fire();//Caso queira deixar a caixa marcada desde o início
 
-        bottomPane.getChildren().addAll(field1, field2,field3, campoNumero, gerarButton, imageView1, imageView2,imageView3, checkBox);
+        bottomPane.getChildren().addAll(field1, field2,field3, campoNumero, gerarButton, imageView1, imageView2,imageView3, checkBox,textLastAIH);
         return bottomPane;
     }
 
@@ -66,19 +76,27 @@ public class InputArea {
         TextField textField = new TextField();
         textField.setPrefHeight(37);
         textField.setPrefWidth(176);
-        textField.setLayoutX(250);
-        textField.setLayoutY(layoutY-10);
+        textField.setLayoutX(350);
+        textField.setLayoutY(layoutY-45);
         textField.setPromptText(promptText);
         textField.getStyleClass().add("no-border");
+        textField.setAlignment(Pos.CENTER);
         return textField;
     }  private TextField createTextField(String promptText,double layoutX, double layoutY) {
         TextField textField = new TextField();
         textField.setPrefHeight(37);
         textField.setPrefWidth(176);
-        textField.setLayoutX(20);
+        textField.setLayoutX(350);
         textField.setLayoutY(layoutY-10);
         textField.setPromptText(promptText);
         textField.getStyleClass().add("no-border");
+        textField.setStyle(
+                "-fx-background-color: transparent;" +  // Define o fundo transparente (opcional)
+                        "-fx-border-color: transparent;"        // Remove a borda ao tornar a cor transparente
+
+        );
+        textField.setAlignment(Pos.CENTER);
+        textField.setEditable(false);
         return textField;
     }
 
@@ -92,6 +110,7 @@ public class InputArea {
     }
 
     private void configureCheckBox(CheckBox checkBox, TextField campo2, TextField campoNumero, ImageView imageView) {
+
         checkBox.setOnAction(event -> {
             boolean isChecked = checkBox.isSelected();
             campo2.setVisible(!isChecked);
@@ -106,13 +125,18 @@ public class InputArea {
         });
     }
 
-    private void configureGenerateButton(Button button, TextField field1, TextField field2,TextField field3, TextField numberField) {
-        Logger logger = new Logger();
-        button.setLayoutX(280);
-        button.setLayoutY(130);
-        button.setPrefSize(100, 30);
-        button.setStyle("-fx-background-color: #2ecd70; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;");
+    private static void configureGenerateButton(Button button, TextField field1, TextField field2, TextField field3, TextField numberField) {
+
+        button.setLayoutX(380);
+        button.setLayoutY(95);
+        button.setPrefSize(100, 42);
+        button.setStyle("-fx-background-color: #32c760; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;");
         field3.setText(logger.getLastEntry());
+
+
+
+
+
         addButtonAnimations(button);
 
         button.setOnAction(event -> {
@@ -135,7 +159,7 @@ public class InputArea {
                 //Para Campo 2 Com Etiqueta Final:
                 if(field1Text.length()!=13||isField2Incorrect){
                     System.out.println("oi");
-                    throw new IncorrectTagSizeException();
+
                 }
                 if (field1Text.endsWith("0") && isField3Incorrect) {
                     throw new TagEndsWithZeroException();
@@ -155,23 +179,24 @@ public class InputArea {
                     else if (field3Text.length()==13 && field1Text.endsWith("0")) {
                         field1Text.replace("-","");
                         field3Text.replace("-","");
-                        PdfGenerator.generatePdfFile(stringFormatter.formatString(field3Text),stringFormatter.formatString(field1Text),Integer.parseInt(field2Text));
+                        PdfGenerator.generatePdfFile(StringFormatter.formatString(field3Text), StringFormatter.formatString(field1Text),Integer.parseInt(field2Text));
                     } else {
                         field1Text.replace("-","");
-                        PdfGenerator.generatePdfFile(stringFormatter.formatString(field1Text), Integer.parseInt(field2Text));
+
+                        PdfGenerator.generatePdfFile(StringFormatter.formatString(field1Text), Integer.parseInt(field2Text));
 
                     }
                 }
                 else if(field1Text.endsWith("0")&&!isField3Incorrect){
                     try {
-                        PdfGenerator.generatePdfFile(stringFormatter.formatString(field3Text),stringFormatter.formatString(field1Text),stringFormatter.formatString(field2Text));
+                        PdfGenerator.generatePdfFile(StringFormatter.formatString(field3Text), StringFormatter.formatString(field1Text), StringFormatter.formatString(field2Text));
                     } catch (Exception e) {
                         ErrorHandler.showMessageDialog("Erro",e.getMessage());
                     }
                 }
                 else {
                     try {
-                        PdfGenerator.generatePdfFile(stringFormatter.formatString(field1Text), stringFormatter.formatString(field2Text));
+                        PdfGenerator.generatePdfFile(StringFormatter.formatString(field1Text), StringFormatter.formatString(field2Text));
 
                     } catch (Exception e) {
                         ErrorHandler.showMessageDialog("Erro", e.getMessage());
@@ -189,6 +214,7 @@ public class InputArea {
             }
 
             field3.setText(logger.getLastEntry());
+
         });
 
         PauseTransition pause = new PauseTransition(Duration.millis(1));
@@ -208,11 +234,10 @@ public class InputArea {
 
             // Permite apenas números e hífens
             String newText = change.getControlNewText();
-            if (newText.matches("[\\d-]*")) {
-                return change; // Permite a mudança
+            if (newText.matches("[\\d-]*") || (change.isAdded() && change.getText().equals("\u0001"))) { // \u00001 Permite Ctrl+A
+                return change;
             }
-
-            return null; // Ignora a mudança se não for numérico ou hífen
+            return null;
         };
 
         textField.setTextFormatter(new TextFormatter<>(filter));

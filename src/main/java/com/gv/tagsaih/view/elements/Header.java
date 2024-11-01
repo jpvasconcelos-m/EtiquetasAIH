@@ -3,32 +3,53 @@ package com.gv.tagsaih.view.elements;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
+import java.awt.image.ImagingOpException;
 
 public class Header {
-    public AnchorPane createHeader(){
-       AnchorPane topPane = new AnchorPane();
-       topPane.setPrefSize(600,165);
+    public AnchorPane createHeader() {
+        AnchorPane leftPane = new AnchorPane();
+        leftPane.setPrefSize(600, 400); // Ajuste o tamanho conforme necessário
+        leftPane.setMinWidth(600);
+        leftPane.setMinHeight(200);
 
-        ImageView logo = new ImageView("ses.png");
-        logo.setFitHeight(150);
-        logo.setFitWidth(188);
+        Line line = new Line();
+        line.setLayoutX(268);
+        line.setLayoutY(0);
+        line.setStartX(0);
+        line.setEndX(0);
+        line.setStartY(-80);
+        line.setEndY(360);
 
-        Label titleLabel = new Label("Gerador de Etiquetas");
-        titleLabel.setTextFill(javafx.scene.paint.Color.web("#2ecd70"));
-        titleLabel.setFont(Font.font("Georgia", FontWeight.BOLD, FontPosture.ITALIC, 29));
-        titleLabel.setStyle("-fx-background-color: transparent; -fx-padding: 10; -fx-border-color: #2ecd70; -fx-border-width: 2; -fx-border-radius: 10;");
 
-        AnchorPane.setLeftAnchor(logo, 0.0);
-        AnchorPane.setRightAnchor(titleLabel, 50.0);
-        AnchorPane.setTopAnchor(titleLabel, 60.0);
-        AnchorPane.setLeftAnchor(titleLabel, 200.0);
 
-        topPane.getChildren().addAll(logo, titleLabel);
-        return topPane;
 
+        Label titleLabel = new Label("""
+                Etiquetas
+                       AIH""");
+        titleLabel.setTextFill(javafx.scene.paint.Color.web("#33a179"));
+        titleLabel.setFont(Font.font("Impact", FontWeight.BOLD, FontPosture.REGULAR, 36));
+        titleLabel.setStyle("-fx-background-color: transparent; ");
+        ImageView logo2 =new ImageView("tagger7.png");
+        logo2.setLayoutY(10);
+
+        logo2.setFitWidth(253);
+        logo2.setFitHeight(353);
+
+
+        // Centralizando o título horizontalmente
+        titleLabel.setLayoutX(53);
+        titleLabel.setLayoutY(210); // Ajuste a posição vertical conforme necessário
+
+        // Posicionando o logo no topo
+
+
+        // Adicionando logo e título ao pane
+        leftPane.getChildren().addAll(logo2,line);
+        return leftPane;
     }
 }
