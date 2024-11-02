@@ -41,17 +41,18 @@ public class InputArea {
         TextField field1 = createNumericTextField("Etiqueta Inicial", 6);
         TextField field2 = createNumericTextField("Etiqueta Final", 52);
         TextField field3 = createNumericTextField("Última Etiqueta Impressa", 1000, -90);
+        TextField field4 = createNumericTextField("Penúltima Etiqueta Impressa", 1000, -115);
         TextField campoNumero = createNumericTextField("Quantidade de Etiquetas", 52);
         campoNumero.setVisible(false); // Inicialmente invisível
-        Text textLastAIH = new Text("Última AIH Gerada:");
+        Text textLastAIH = new Text("Últimas AIHs Geradas:");
         textLastAIH.setFont(Font.font("Univers", FontWeight.BOLD,15));
-        textLastAIH.setLayoutX(field3.getLayoutX()+25);
-        textLastAIH.setLayoutY(field3.getLayoutY()-3);
+        textLastAIH.setLayoutX(field3.getLayoutX()+13);
+        textLastAIH.setLayoutY(field3.getLayoutY()-20);
 
 
         ImageView imageView1 = createImageView("images.png", field1.getLayoutX()-30, field1.getLayoutY()+10);
         ImageView imageView2 = createImageView("images.png", field2.getLayoutX()-30, field2.getLayoutY()+10);
-        ImageView imageView3 = createImageView("clock.png", field3.getLayoutX()+83, field3.getLayoutY()-50);
+        ImageView imageView3 = createImageView("clock.png", field3.getLayoutX()+78, field3.getLayoutY()-62);
 
         CheckBox checkBox = new CheckBox("Gerar usando Etq. inicial e Quantidade de etiquetas");
         checkBox.setLayoutX(300);
@@ -65,10 +66,10 @@ public class InputArea {
         bottomPane.getChildren().add(footer);
 
         Button gerarButton = new Button("GERAR");
-        configureGenerateButton(gerarButton, field1, field2, field3,campoNumero);
+        configureGenerateButton(gerarButton, field1, field2, field3,field4,campoNumero);
        // checkBox.fire();//Caso queira deixar a caixa marcada desde o início
 
-        bottomPane.getChildren().addAll(field1, field2,field3, campoNumero, gerarButton, imageView1, imageView2,imageView3, checkBox,textLastAIH);
+        bottomPane.getChildren().addAll(field1, field2,field3,field4, campoNumero, gerarButton, imageView1, imageView2,imageView3, checkBox,textLastAIH);
         return bottomPane;
     }
 
@@ -125,13 +126,14 @@ public class InputArea {
         });
     }
 
-    private static void configureGenerateButton(Button button, TextField field1, TextField field2, TextField field3, TextField numberField) {
+    private static void configureGenerateButton(Button button, TextField field1, TextField field2, TextField field3,TextField field4, TextField numberField) {
 
         button.setLayoutX(380);
         button.setLayoutY(95);
         button.setPrefSize(100, 42);
         button.setStyle("-fx-background-color: #32c760; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;");
         field3.setText(logger.getLastEntry());
+        field4.setText(logger.getTwoLastEntries().get(0));
 
 
 
@@ -214,6 +216,7 @@ public class InputArea {
             }
 
             field3.setText(logger.getLastEntry());
+            field4.setText(logger.getTwoLastEntries().get(0));
 
         });
 

@@ -74,6 +74,31 @@ public class Logger {
         return null; // Retorna null se não houver entradas
     }
 
+    public List<String> getTwoLastEntries() {
+        Path filePath = Paths.get(FILE_NAME);
+
+        try {
+            // Verifica se o arquivo existe
+            if (Files.exists(filePath)) {
+                List<String> lines = Files.readAllLines(filePath);
+
+                // Se o arquivo não estiver vazio, pega as duas últimas linhas
+                if (lines.size() >= 2) {
+                    String secondLastLine = lines.get(lines.size() - 2);
+                    String lastLine = lines.get(lines.size() - 1);
+                    return List.of(removeTimestamp(secondLastLine), removeTimestamp(lastLine));
+                } else if (lines.size() == 1) {
+                    String lastLine = lines.get(lines.size() - 1);
+                    return List.of(removeTimestamp(lastLine));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return List.of(); // Retorna uma lista vazia se não houver entradas
+    }
+
 
 
 
