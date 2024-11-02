@@ -66,7 +66,7 @@ public class InputArea {
 
         Button gerarButton = new Button("GERAR");
         configureGenerateButton(gerarButton, field1, field2, field3,campoNumero);
-       // checkBox.fire();//Caso queira deixar a caixa marcada desde o início
+        checkBox.fire();//Caso queira deixar a caixa marcada desde o início
 
         bottomPane.getChildren().addAll(field1, field2,field3, campoNumero, gerarButton, imageView1, imageView2,imageView3, checkBox,textLastAIH);
         return bottomPane;

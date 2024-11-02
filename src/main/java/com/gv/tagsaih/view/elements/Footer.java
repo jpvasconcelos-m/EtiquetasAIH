@@ -11,7 +11,7 @@ public class Footer {
         footer.setStyle("-fx-background-color: #f0f0f0; -fx-padding: 10; -fx-alignment: center;");
 
 
-        Text devs = new Text("Desenvolvedores: Aloísio Glarkson Andrade de Jesus | João Pedro Vasconcelos Mendes");
+        Text devs = new Text("Desenvolvedores: Aloísio Glarkson Andrade de Jesus | João Pedro Vasconcelos Mendes | ©2024");
         devs.setFill(Color.DARKGRAY);
         devs.setTextAlignment(TextAlignment.CENTER);
         footer.getChildren().add(devs);
