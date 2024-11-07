@@ -30,15 +30,14 @@ public class StringFormatter {
     */
 
     public static String formatString(String input){
-        if(input.length() <13) {
-
-        }
 
 
-        String part1 = input.substring(0,2);
-        String part2 = input.substring(2,4);
-        String part3 = input.substring(4,12);
-        String part4 = input.substring(12,13);
+
+        String part1 = input.substring(0, 2); // Os primeiros 2 caracteres
+        String part2 = input.substring(2, 4); // Os próximos 2 caracteres
+        String part3 = input.substring(4, input.length() - 1); // Parte 3 até o penúltimo caractere
+        String part4 = input.substring(input.length() - 1); // Último caractere
+        System.out.println(part1+ "," + part2 + "," + part3 + "," + part4);
 
         return part1+ "," + part2 + "," + part3 + "," + part4;
 
