@@ -33,11 +33,11 @@ public class PdfGenerator {
 
     public static void generatePdfFile(String stringTag1, String stringTag2) throws Exception{
         //Configura tamanho da página:
-        Document document = new Document(new Rectangle(42f,98f),0,0,4,0);
+        Document document = new Document(new Rectangle(42f,98f),0,0,-8,0);
         //Rotaciona para paisagem:
         document.setPageSize(document.getPageSize().rotate());
         //Cria um arquivo pdf:
-        PdfWriter.getInstance(document, new FileOutputStream("teste.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream("EtiquetasAIH.pdf"));
 
         document.open();
 
@@ -51,32 +51,28 @@ public class PdfGenerator {
             document.newPage();
             Paragraph paragraph1 = new Paragraph(tags.get(i));
             paragraph1.setAlignment(Element.ALIGN_CENTER);
+            paragraph1.setSpacingBefore(-15f);
             document.add(paragraph1);
 
             document.newPage();
             Paragraph paragraph2 = new Paragraph(tags.get(i) + " Cópia");
             paragraph2.setAlignment(Element.ALIGN_CENTER);
+            paragraph2.setSpacingBefore(-15f);
             document.add(paragraph2);
 
         }
 
-
-
-
-
-
-
-        Desktop.getDesktop().open(new File("teste.pdf"));
+        Desktop.getDesktop().open(new File("EtiquetasAIH.pdf"));
         Logger logger = new Logger();
         logger.log(tags);
         document.close();
     } public static void generatePdfFile(String stringPreviousTag,String stringTag1, String stringTag2) throws Exception{
         //Configura tamanho da página:
-        Document document = new Document(new Rectangle(42f,98f),0,0,4,0);
+        Document document = new Document(new Rectangle(42f,98f),0,0,-8,0);
         //Rotaciona para paisagem:
         document.setPageSize(document.getPageSize().rotate());
         //Cria um arquivo pdf:
-        PdfWriter.getInstance(document, new FileOutputStream("teste.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream("EtiquetasAIH.pdf"));
 
         document.open();
 
@@ -91,11 +87,14 @@ public class PdfGenerator {
             document.newPage();
             Paragraph paragraph1 = new Paragraph(tags.get(i));
             paragraph1.setAlignment(Element.ALIGN_CENTER);
+            paragraph1.setSpacingBefore(-15f);
             document.add(paragraph1);
+
 
             document.newPage();
             Paragraph paragraph2 = new Paragraph(tags.get(i) + " Cópia");
             paragraph2.setAlignment(Element.ALIGN_CENTER);
+            paragraph2.setSpacingBefore(-15f);
             document.add(paragraph2);
 
         }
@@ -106,7 +105,7 @@ public class PdfGenerator {
 
 
 
-        Desktop.getDesktop().open(new File("teste.pdf"));
+        Desktop.getDesktop().open(new File("EtiquetasAIH.pdf"));
         Logger logger = new Logger();
         logger.log(tags);
 
@@ -114,12 +113,12 @@ public class PdfGenerator {
     }
     public static void generatePdfFile(String stringTag1, Integer tagQuantity) {
         //Configura tamanho da página:
-        Document document = new Document(new Rectangle(42f,98f),0,0,4,0);
+        Document document = new Document(new Rectangle(42f,98f),0,0,-8,0);
         //Rotaciona para paisagem:
         document.setPageSize(document.getPageSize().rotate());
         //Cria um arquivo pdf:
         try {
-            PdfWriter.getInstance(document, new FileOutputStream("teste.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("EtiquetasAIH.pdf"));
         } catch (DocumentException e) {
             throw new RuntimeException(e);
         } catch (FileNotFoundException e) {
@@ -142,6 +141,7 @@ public class PdfGenerator {
             document.newPage();
             Paragraph paragraph1 = new Paragraph(tags.get(i));
             paragraph1.setAlignment(Element.ALIGN_CENTER);
+            paragraph1.setSpacingBefore(-15f);
             try {
                 document.add(paragraph1);
             } catch (DocumentException e) {
@@ -161,7 +161,7 @@ public class PdfGenerator {
 
 
         try {
-            Desktop.getDesktop().open(new File("teste.pdf"));
+            Desktop.getDesktop().open(new File("EtiquetasAIH.pdf"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -170,12 +170,12 @@ public class PdfGenerator {
         document.close();
     }public static void generatePdfFile(String stringPreviousTag,String stringTag1, Integer tagQuantity) {
         //Configura tamanho da página:
-        Document document = new Document(new Rectangle(42f,98f),0,0,4,0);
+        Document document = new Document(new Rectangle(42f,98f),0,0,-8,0);
         //Rotaciona para paisagem:
-        document.setPageSize(document.getPageSize().rotate());
+       document.setPageSize(document.getPageSize().rotate());
         //Cria um arquivo pdf:
         try {
-            PdfWriter.getInstance(document, new FileOutputStream("teste.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("EtiquetasAIH.pdf"));
         } catch (DocumentException e) {
             throw new RuntimeException(e);
         } catch (FileNotFoundException e) {
@@ -200,6 +200,7 @@ public class PdfGenerator {
             document.newPage();
             Paragraph paragraph1 = new Paragraph(tags.get(i));
             paragraph1.setAlignment(Element.ALIGN_CENTER);
+            paragraph1.setSpacingBefore(-15f);
             try {
                 document.add(paragraph1);
             } catch (DocumentException e) {
@@ -209,6 +210,7 @@ public class PdfGenerator {
             document.newPage();
             Paragraph paragraph2 = new Paragraph(tags.get(i) + " Cópia");
             paragraph2.setAlignment(Element.ALIGN_CENTER);
+            paragraph2.setSpacingBefore(20f);
             try {
                 document.add(paragraph2);
             } catch (DocumentException e) {
@@ -219,7 +221,7 @@ public class PdfGenerator {
 
 
         try {
-            Desktop.getDesktop().open(new File("teste.pdf"));
+            Desktop.getDesktop().open(new File("EtiquetasAIH.pdf"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
