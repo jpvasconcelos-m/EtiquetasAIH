@@ -7,9 +7,9 @@ module com.gv.etiquetasaih {
 
 
 
-    requires org.controlsfx.controls;
+
     requires java.desktop;
-    requires commons.logging;
+
 
 
     exports com.gv.tagsaih.view;
