@@ -18,7 +18,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import org.apache.commons.logging.Log;
 
 import java.util.function.UnaryOperator;
 
@@ -151,36 +150,21 @@ public class InputArea {
 
 
             boolean isField2Incorrect = field2Text.length()!=13 && !numberField.isVisible();
-            boolean isField3Incorrect = field3Text.length()!=13  || field3Text.isBlank();
+
 
 
             System.out.println("Campo 1: " + field1Text);
             System.out.println("Campo 2: " + field2Text);
             try {
 
-                //Para Campo 2 Com Etiqueta Final:
-                if(field1Text.length()!=13||isField2Incorrect){
-                    System.out.println("oi");
 
-                }
-                if (field1Text.endsWith("0") && isField3Incorrect) {
-                    throw new TagEndsWithZeroException();
-                }
+
                 //Para campo 2 com quantidade de etiquetas:
-                else if (numberField.isVisible()){
+                 if (numberField.isVisible()){
                     //--Campo 3 em branco e campo 1 termina em 0 --> Joga exceção
-                    if(field3Text.isBlank()&&field1Text.endsWith("0")){
-                        field1Text.replace("-","");
-                        throw new TagEndsWithZeroException();
-                    //--Campo 3 no tamanho incoreto e campo 1 termina em zero     --> Joga exceção
-                    }  if(field3Text.length()!=13&&field1Text.endsWith("0")){
-                        field1Text.replace("-","");
-                        throw new IncorrectTagSizeException();
-                    }
-                        //--Campo 3 no tamanho certo e campo 1 termina em zero --> Procede
-                    else if (field3Text.length()==13 && field1Text.endsWith("0")) {
-                        field1Text.replace("-","");
-                        field3Text.replace("-","");
+
+
+                    if (field1Text.endsWith("0")) {
                         PdfGenerator.generatePdfFile(StringFormatter.formatString(field3Text), StringFormatter.formatString(field1Text),Integer.parseInt(field2Text));
                     } else {
                         field1Text.replace("-","");
@@ -189,8 +173,9 @@ public class InputArea {
 
                     }
                 }
-                else if(field1Text.endsWith("0")&&!isField3Incorrect){
+                else if(field1Text.endsWith("0")){
                     try {
+
                         PdfGenerator.generatePdfFile(StringFormatter.formatString(field3Text), StringFormatter.formatString(field1Text), StringFormatter.formatString(field2Text));
                     } catch (Exception e) {
                         ErrorHandler.showMessageDialog("Erro",e.getMessage());
@@ -205,14 +190,21 @@ public class InputArea {
                     }
                 }
             }
-            catch (IncorrectTagSizeException e){
-                ErrorHandler.showMessageDialog("Erro",e.getMessage());
-            }
+
+//            catch (IncorrectTagSizeException e){
+//                ErrorHandler.showMessageDialog("Erro",e.getMessage());
+//            }
 
 
             catch (TagEndsWithZeroException e) {
                 // Aqui chamamos o showInputDialog se a exceção for de TagEndsWithZeroException
                 ErrorHandler.showMessageDialog("Informações insuficientes.", "Informe a última AIH impressa");
+            }
+            catch (NumberFormatException e) {
+                ErrorHandler.showMessageDialog("Erro","Digite apenas números no campo de quantidade de etiquetas!");
+            }
+            catch (IllegalArgumentException e){
+                ErrorHandler.showMessageDialog("Erro",e.getMessage());
             }
 
             field3.setText(logger.getLastEntry());
@@ -254,7 +246,7 @@ public class InputArea {
     }
     private TextField createNumericTextField(String promptText, double layoutY) {
         TextField textField = createTextField(promptText, layoutY);
-        setNumericTextFormatter(textField);
+       setNumericTextFormatter(textField);
         return textField;
     }
 
