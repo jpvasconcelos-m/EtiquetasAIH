@@ -33,7 +33,7 @@ public class PdfGenerator {
 
     public static void generatePdfFile(String stringTag1, String stringTag2) throws Exception{
         //Configura tamanho da página:
-        Document document = new Document(new Rectangle(42f,98f),0,0,-8,0);
+        Document document = new Document(new Rectangle(42f,98f),0,0,-5,0);
         //Rotaciona para paisagem:
         document.setPageSize(document.getPageSize().rotate());
         //Cria um arquivo pdf:
@@ -51,14 +51,8 @@ public class PdfGenerator {
             document.newPage();
             Paragraph paragraph1 = new Paragraph(tags.get(i));
             paragraph1.setAlignment(Element.ALIGN_CENTER);
-            paragraph1.setSpacingBefore(-15f);
             document.add(paragraph1);
 
-            document.newPage();
-            Paragraph paragraph2 = new Paragraph(tags.get(i) + " Cópia");
-            paragraph2.setAlignment(Element.ALIGN_CENTER);
-            paragraph2.setSpacingBefore(-15f);
-            document.add(paragraph2);
 
         }
 
@@ -68,7 +62,7 @@ public class PdfGenerator {
         document.close();
     } public static void generatePdfFile(String stringPreviousTag,String stringTag1, String stringTag2) throws Exception{
         //Configura tamanho da página:
-        Document document = new Document(new Rectangle(42f,98f),0,0,-8,0);
+        Document document = new Document(new Rectangle(42f,98f),0,0,-5,0);
         //Rotaciona para paisagem:
         document.setPageSize(document.getPageSize().rotate());
         //Cria um arquivo pdf:
@@ -91,11 +85,7 @@ public class PdfGenerator {
             document.add(paragraph1);
 
 
-            document.newPage();
-            Paragraph paragraph2 = new Paragraph(tags.get(i) + " Cópia");
-            paragraph2.setAlignment(Element.ALIGN_CENTER);
-            paragraph2.setSpacingBefore(-15f);
-            document.add(paragraph2);
+
 
         }
 
@@ -113,7 +103,7 @@ public class PdfGenerator {
     }
     public static void generatePdfFile(String stringTag1, Integer tagQuantity) {
         //Configura tamanho da página:
-        Document document = new Document(new Rectangle(42f,98f),0,0,-8,0);
+        Document document = new Document(new Rectangle(42f,98f),0,0,-5,0);
         //Rotaciona para paisagem:
         document.setPageSize(document.getPageSize().rotate());
         //Cria um arquivo pdf:
@@ -148,14 +138,7 @@ public class PdfGenerator {
                 throw new RuntimeException(e);
             }
 
-            document.newPage();
-            Paragraph paragraph2 = new Paragraph(tags.get(i) + " Cópia");
-            paragraph2.setAlignment(Element.ALIGN_CENTER);
-            try {
-                document.add(paragraph2);
-            } catch (DocumentException e) {
-                throw new RuntimeException(e);
-            }
+
 
         }
 
@@ -170,7 +153,7 @@ public class PdfGenerator {
         document.close();
     }public static void generatePdfFile(String stringPreviousTag,String stringTag1, Integer tagQuantity) {
         //Configura tamanho da página:
-        Document document = new Document(new Rectangle(42f,98f),0,0,-8,0);
+        Document document = new Document(new Rectangle(42f,98f),0,0,-5,0);
         //Rotaciona para paisagem:
        document.setPageSize(document.getPageSize().rotate());
         //Cria um arquivo pdf:
@@ -207,15 +190,7 @@ public class PdfGenerator {
                 throw new RuntimeException(e);
             }
 
-            document.newPage();
-            Paragraph paragraph2 = new Paragraph(tags.get(i) + " Cópia");
-            paragraph2.setAlignment(Element.ALIGN_CENTER);
-            paragraph2.setSpacingBefore(20f);
-            try {
-                document.add(paragraph2);
-            } catch (DocumentException e) {
-                throw new RuntimeException(e);
-            }
+
 
         }
 
