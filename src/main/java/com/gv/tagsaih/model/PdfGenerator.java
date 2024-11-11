@@ -19,9 +19,10 @@ public class PdfGenerator {
 
     Logger logger = new Logger();
 
-
     //TESTE:
     public static void main(String[] args) throws Exception {
+
+
         Operates operates = new Operates();
         System.out.println(operates.operate(new Tag(26, 24, 11028345, 9),new Tag(26, 24, 11028370, 2)));
        // System.out.println(operates.operatesWithTagQuantity(new Tag(26, 24, 11028345, 9),100));
@@ -33,7 +34,7 @@ public class PdfGenerator {
 
     public static void generatePdfFile(String stringTag1, String stringTag2) throws Exception{
         //Configura tamanho da página:
-        Document document = new Document(new Rectangle(42f,98f),0,0,-5,0);
+        Document document = new Document(new Rectangle(42f,98f),0,0,0,0);
         //Rotaciona para paisagem:
         document.setPageSize(document.getPageSize().rotate());
         //Cria um arquivo pdf:
@@ -60,9 +61,12 @@ public class PdfGenerator {
         Logger logger = new Logger();
         logger.log(tags);
         document.close();
-    } public static void generatePdfFile(String stringPreviousTag,String stringTag1, String stringTag2) throws Exception{
+    }
+    public static void generatePdfFile(String stringPreviousTag,String stringTag1, String stringTag2) throws Exception{
+
+
         //Configura tamanho da página:
-        Document document = new Document(new Rectangle(42f,98f),0,0,-5,0);
+        Document document = new Document(new Rectangle(42f,98f),0,0,0,0);
         //Rotaciona para paisagem:
         document.setPageSize(document.getPageSize().rotate());
         //Cria um arquivo pdf:
@@ -102,8 +106,9 @@ public class PdfGenerator {
         document.close();
     }
     public static void generatePdfFile(String stringTag1, Integer tagQuantity) {
+
         //Configura tamanho da página:
-        Document document = new Document(new Rectangle(42f,98f),0,0,-5,0);
+        Document document = new Document(new Rectangle(42f,98f),0,0,0,0);
         //Rotaciona para paisagem:
         document.setPageSize(document.getPageSize().rotate());
         //Cria um arquivo pdf:
@@ -153,7 +158,7 @@ public class PdfGenerator {
         document.close();
     }public static void generatePdfFile(String stringPreviousTag,String stringTag1, Integer tagQuantity) {
         //Configura tamanho da página:
-        Document document = new Document(new Rectangle(42f,98f),0,0,-5,0);
+        Document document = new Document(new Rectangle(42f,98f),0,0,0,0);
         //Rotaciona para paisagem:
        document.setPageSize(document.getPageSize().rotate());
         //Cria um arquivo pdf:
