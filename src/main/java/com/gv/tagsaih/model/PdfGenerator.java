@@ -19,7 +19,7 @@ public class PdfGenerator {
 
     Logger logger = new Logger();
 
-    // Método principal
+    // Metodo principal
     public static void main(String[] args) throws Exception {
         Operates operates = new Operates();
         System.out.println(operates.operate(new Tag(26, 24, 11028345, 9), new Tag(26, 24, 11028370, 2)));
@@ -28,7 +28,7 @@ public class PdfGenerator {
         StringFormatter.convertStringToTag("26,24,10190148,7");
     }
 
-    // Método para gerar PDF com a imagem transparente e numeração de etiqueta
+    // Metodo para gerar PDF com a imagem transparente e numeração de etiqueta
     public static void generatePdfFile(String stringTag1, String stringTag2) throws Exception {
         Document document = new Document(new Rectangle(42f, 98f), 0, 0, 0, 0);
         document.setPageSize(document.getPageSize().rotate());
@@ -54,7 +54,7 @@ public class PdfGenerator {
         document.close();
     }
 
-    // Método para gerar PDF com a imagem transparente e numeração de etiqueta (com 3 tags)
+    // Metodo para gerar PDF com a imagem transparente e numeração de etiqueta (com 3 tags)
     public static void generatePdfFile(String stringPreviousTag, String stringTag1, String stringTag2) throws Exception {
         Document document = new Document(new Rectangle(42f, 98f), 0, 0, 0, 0);
         document.setPageSize(document.getPageSize().rotate());
@@ -81,7 +81,7 @@ public class PdfGenerator {
         document.close();
     }
 
-    // Método para gerar PDF com a imagem transparente e quantidade de tags
+    // Metodo para gerar PDF com a imagem transparente e quantidade de tags
     public static void generatePdfFile(String stringTag1, Integer tagQuantity) {
         Document document = new Document(new Rectangle(42f, 98f), 0, 0, 0, 0);
         document.setPageSize(document.getPageSize().rotate());
@@ -110,7 +110,7 @@ public class PdfGenerator {
         }
     }
 
-    // Método para gerar PDF com a imagem transparente, com 3 tags e quantidade de tags
+    // Metodo para gerar PDF com a imagem transparente, com 3 tags e quantidade de tags
     public static void generatePdfFile(String stringPreviousTag, String stringTag1, Integer tagQuantity) {
         Document document = new Document(new Rectangle(42f, 98f), 0, 0, 0, 0);
         document.setPageSize(document.getPageSize().rotate());
@@ -140,7 +140,7 @@ public class PdfGenerator {
         }
     }
 
-    // Método para adicionar a imagem transparente a cada página
+    // Metodo para adicionar a imagem transparente a cada página
     private static void addTransparentImage(PdfWriter writer, Document document) throws IOException, DocumentException {
         // Carregar a imagem do diretório 'resources' usando ClassLoader
         String imagePath = "background/sec-saude-gov-pe-logo.png";  // Caminho relativo
@@ -175,7 +175,7 @@ public class PdfGenerator {
         canvas.addImage(image);
     }
 
-    // Método para adicionar o número da etiqueta sobre a imagem
+    // Metodo para adicionar o número da etiqueta sobre a imagem
     private static void addTagNumber(PdfWriter writer, String tagText, Document document) throws DocumentException {
         // Adiciona o texto centralizado sobre a imagem
         Font font = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
