@@ -30,7 +30,7 @@ public class PdfGenerator {
 
     // Metodo para gerar PDF com a imagem transparente e numeração de etiqueta
     public static void generatePdfFile(String stringTag1, String stringTag2) throws Exception {
-        Document document = new Document(new Rectangle(42f, 98f), 0, 0, 0, 0);
+        Document document = new Document(new Rectangle(42f, 98f), 0, 0, 5, 0);
         document.setPageSize(document.getPageSize().rotate());
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("EtiquetasAIH.pdf"));
         document.open();
@@ -56,7 +56,7 @@ public class PdfGenerator {
 
     // Metodo para gerar PDF com a imagem transparente e numeração de etiqueta (com 3 tags)
     public static void generatePdfFile(String stringPreviousTag, String stringTag1, String stringTag2) throws Exception {
-        Document document = new Document(new Rectangle(42f, 98f), 0, 0, 0, 0);
+        Document document = new Document(new Rectangle(42f, 98f), 0, 0,12, 0);
         document.setPageSize(document.getPageSize().rotate());
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("EtiquetasAIH.pdf"));
         document.open();
@@ -83,7 +83,7 @@ public class PdfGenerator {
 
     // Metodo para gerar PDF com a imagem transparente e quantidade de tags
     public static void generatePdfFile(String stringTag1, Integer tagQuantity) {
-        Document document = new Document(new Rectangle(42f, 98f), 0, 0, 0, 0);
+        Document document = new Document(new Rectangle(42f, 98f), 0, 0,12, 0);
         document.setPageSize(document.getPageSize().rotate());
         try {
             PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("EtiquetasAIH.pdf"));
@@ -112,7 +112,7 @@ public class PdfGenerator {
 
     // Metodo para gerar PDF com a imagem transparente, com 3 tags e quantidade de tags
     public static void generatePdfFile(String stringPreviousTag, String stringTag1, Integer tagQuantity) {
-        Document document = new Document(new Rectangle(42f, 98f), 0, 0, 0, 0);
+        Document document = new Document(new Rectangle(42f, 98f), 0, 0,12, 0);
         document.setPageSize(document.getPageSize().rotate());
         try {
             PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("EtiquetasAIH.pdf"));
@@ -165,7 +165,7 @@ public class PdfGenerator {
 
         // Calcular a posição central para a imagem
         float xPosition = (pageWidth - image.getScaledWidth()) / 2;  // Posição horizontal central
-        float yPosition = (pageHeight - image.getScaledHeight()) / 2; // Posição vertical central
+        float yPosition = (pageHeight - image.getScaledHeight()) -20/ 2; // Posição vertical central
 
         // Definir a posição da imagem centralizada
         image.setAbsolutePosition(xPosition, yPosition);
